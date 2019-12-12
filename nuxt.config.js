@@ -12,15 +12,29 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  server: {
+    port: 9101,
+    host: '0.0.0.0'
+  },
+  srcDir: 'src/',
+  router: {
+    routeNameSplitter: '/',
+    scrollBehavior (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
+  },
   loading: { color: '#fff' },
   css: [
     'view-design/dist/styles/iview.css'
   ],
   plugins: [
-    '@/plugins/iview'
+    { src: '@/plugins/iview' },
+    { src: '@/plugins/component' },
+    { src: '@/plugins/svg-icon' },
+    { src: '@/plugins/vuejs-avataaars' },
+    { src: '@/plugins/animate' }
   ],
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
   modules: [
