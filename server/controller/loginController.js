@@ -1,8 +1,10 @@
 const express = require('express')
+const jwt = require('../util/jwtUtil')
 const router = express.Router()
 
-router.post('/login', function (req, res) {
-  res.send('hello ....')
+// eslint-disable-next-line require-await
+router.post('/login', async (req, res) => {
+  res.send(jwt.build({ name: '222' }))
 })
 
 module.exports = router

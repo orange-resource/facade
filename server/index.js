@@ -1,7 +1,9 @@
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+require('express-async-errors')
 const initRouter = require('../server/router/index')
+const initMiddleware = require('../server/middleware/index')
 const app = express()
 
 const config = require('../nuxt.config.js')
@@ -18,6 +20,9 @@ async function start () {
   } else {
     await nuxt.ready()
   }
+
+  // 初始化中间件
+  initMiddleware(app)
 
   // 初始化路由
   initRouter(app)
