@@ -3,15 +3,16 @@
     <div class="box">
       <div class="login-box animated bounce">
         <div class="title-box">
-          <h2>登录</h2>
+          <h2>橘子后台管理系统2</h2>
         </div>
         <div class="content-box">
           <Input class="input" placeholder="请输入管理员账号">
             <Icon type="ios-contact" slot="prefix" />
           </Input>
-          <Input class="input" placeholder="请输入管理员密码">
-            <Icon type="ios-contact" slot="prefix" />
+          <Input class="input" type="password" placeholder="请输入管理员密码">
+            <Icon type="md-ionitron"  slot="prefix" />
           </Input>
+          <Button class="login-button" type="success">登录</Button>
         </div>
       </div>
     </div>
@@ -51,7 +52,7 @@ export default {
      flex-direction: row;
      justify-content: center;
      align-items: center;
-     height: 80px;
+     height: 110px;
    }
    .content-box {
      flex: 1;
@@ -63,6 +64,9 @@ export default {
      }
      .input:nth-child(n+ 2) {
        margin-top: 10px;
+     }
+     .login-button {
+       margin-top: 30px;
      }
    }
  }
