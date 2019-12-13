@@ -25,7 +25,8 @@ module.exports = {
   },
   loading: { color: '#fff' },
   css: [
-    'view-design/dist/styles/iview.css'
+    'view-design/dist/styles/iview.css',
+    '~/assets/css/app.css'
   ],
   plugins: [
     { src: '@/plugins/iview' },
