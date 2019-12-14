@@ -21,7 +21,7 @@
           </div>
         </Card>
       </Content>
-      <Footer class="layout-footer-center">2019 &copy; orange</Footer>
+      <Footer class="layout-footer-center">2019 &copy; orange 开源地址 https://gitee.com/orange-resource/facade</Footer>
     </Layout>
   </div>
 </template>
