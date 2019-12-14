@@ -25,46 +25,46 @@
 </template>
 
 <script>
-import cookie from 'js-cookie'
+  import cookie from 'js-cookie'
 
-export default {
-  name: 'Index',
-  data () {
-    return {
-      loading: false,
-      username: '',
-      password: ''
-    }
-  },
-  methods: {
-    login () {
-      if (this.username === '') {
-        this.$Message.info('账户名不能为空')
-        return
-      } else if (this.password === '') {
-        this.$Message.info('密码不能为空')
-        return
+  export default {
+    name: 'Index',
+    data () {
+      return {
+        loading: false,
+        username: '',
+        password: ''
       }
-
-      this.loading = true
-      this.$axios.$post('/login', {
-        username: this.username,
-        password: this.password
-      }).then((res) => {
-        this.loading = false
-        if (res.code === 1000) {
-          this.$Message.success('登录成功...正在跳转')
-          cookie.set('token', res.data.token, { expires: 7 })
-          this.$router.push('/admin')
-        } else {
-          this.$Message.info(res.message)
+    },
+    methods: {
+      login () {
+        if (this.username === '') {
+          this.$Message.info('账户名不能为空')
+          return
+        } else if (this.password === '') {
+          this.$Message.info('密码不能为空')
+          return
         }
-      }).catch(() => {
-        this.loading = false
-      })
+
+        this.loading = true
+        this.$axios.$post('/login', {
+          username: this.username,
+          password: this.password
+        }).then((res) => {
+          this.loading = false
+          if (res.code === 1000) {
+            this.$Message.success('登录成功...正在跳转')
+            cookie.set('token', res.data.token, { expires: 7 })
+            this.$router.push('/admin')
+          } else {
+            this.$Message.info(res.message)
+          }
+        }).catch(() => {
+          this.loading = false
+        })
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>

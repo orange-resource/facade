@@ -38,16 +38,16 @@
 </template>
 
 <script>
-export default {
-  name: 'Error',
-  // eslint-disable-next-line vue/require-prop-types
-  props: ['error'],
-  data () {
-    return {
-      description: 'QQ号: ' + process.env.qq + '  微信号: ' + process.env.weChat
+  export default {
+    name: 'Error',
+    // eslint-disable-next-line vue/require-prop-types
+    props: ['error'],
+    data () {
+      return {
+        description: 'QQ号: ' + process.env.qq + '  微信号: ' + process.env.weChat
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
