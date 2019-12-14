@@ -33,19 +33,25 @@ module.exports = {
     { src: '@/plugins/component' },
     { src: '@/plugins/svg-icon' },
     { src: '@/plugins/vuejs-avataaars' },
-    { src: '@/plugins/animate' }
+    { src: '@/plugins/animate' },
+    { src: '@/plugins/axios' }
   ],
   buildModules: [
     '@nuxtjs/eslint-module'
   ],
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/axios'
   ],
   axios: {
+    prefix: '/api',
+    retry: { retries: 2 }
   },
   build: {
     extend (config, ctx) {
     }
+  },
+  env: {
+    qq: '1067357662',
+    weChat: 'xiaocry1314'
   }
 }
