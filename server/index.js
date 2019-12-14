@@ -2,7 +2,6 @@ const express = require('express')
 const timeout = require('connect-timeout')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
-// eslint-disable-next-line import/order
 const Rsp = require('./common/Rsp')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -49,7 +48,6 @@ async function start () {
     res.json(Rsp.build(Rsp.ACCESS_TIMEOUT))
   })
 
-  // eslint-disable-next-line handle-callback-err
   app.use((err, req, res, next) => {
     res.json(Rsp.build(Rsp.SERIOUS_ERROR))
   })

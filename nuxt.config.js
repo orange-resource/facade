@@ -34,7 +34,6 @@ module.exports = {
     { src: '@/plugins/axios' }
   ],
   buildModules: [
-    // '@nuxtjs/eslint-module'
   ],
   modules: [
     '@nuxtjs/axios'

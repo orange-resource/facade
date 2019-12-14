@@ -1,12 +1,10 @@
 const express = require('express')
-// eslint-disable-next-line no-unused-vars
 const jwt = require('../util/jwtUtil')
 const User = require('../entity/po/user')
 const asyncHandler = require('../util/asyncHandler')
 const Rsp = require('../common/Rsp')
 const router = express.Router()
 
-// eslint-disable-next-line require-await
 router.post('/login', asyncHandler(async (req, res, next) => {
   if (req.body.username !== undefined && req.body.password !== undefined) {
     User.findAll().then((users) => {

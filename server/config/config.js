@@ -5,7 +5,7 @@
 const Config = {
   jwt: {
     secret: 'facade',
-    expires: 10000 // 1天
+    expires: 86400000 // 1天
   },
   mysql: {
     host: 'localhost',

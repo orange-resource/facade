@@ -9,7 +9,12 @@
           <Input v-model="username" class="input" clearable placeholder="请输入管理员账号">
             <Icon type="ios-contact" slot="prefix" />
           </Input>
-          <Input v-model="password" class="input" clearable type="password" placeholder="请输入管理员密码">
+          <Input v-model="password"
+                 class="input"
+                 clearable
+                 type="password"
+                 @on-enter="login"
+                 placeholder="请输入管理员密码">
             <Icon type="md-ionitron" slot="prefix" />
           </Input>
           <Button class="login-button" type="success" :loading="loading" @click="login()">登录</Button>
@@ -33,6 +38,14 @@ export default {
   },
   methods: {
     login () {
+      if (this.username === '') {
+        this.$Message.info('账户名不能为空')
+        return
+      } else if (this.password === '') {
+        this.$Message.info('密码不能为空')
+        return
+      }
+
       this.loading = true
       this.$axios.$post('/login', {
         username: this.username,

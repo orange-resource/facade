@@ -33,11 +33,7 @@
     "vuejs-avataaars": "^3.0.9"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "5.16.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
     "nodemon": "^1.18.9",
     "svg-sprite-loader": "^4.1.6"
   }
