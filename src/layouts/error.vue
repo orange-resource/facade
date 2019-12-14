@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box">
       <div>
-        <h1 v-if="error.statusCode == 404">
+        <h1 v-if="error.statusCode === 404">
           404
         </h1>
         <h1 v-else>
@@ -10,7 +10,7 @@
         </h1>
       </div>
       <div>
-        <p v-if="error.statusCode == 404" class="description">
+        <p v-if="error.statusCode === 404" class="description">
           抱歉，您访问的资源不存在或者已经被删掉
         </p>
         <p v-else class="description">
@@ -19,15 +19,19 @@
       </div>
       <div style="margin-top: 15px">
         <nuxt-link to="/">
-          <Button type="success" long>去往首页</Button>
+          <Button type="success" long>
+            去往首页
+          </Button>
         </nuxt-link>
       </div>
     </div>
     <div style="position: fixed;top: 50px;width: 80%">
       <Alert show-icon>
         联系客服方式
-        <Icon type="ios-bulb-outline" slot="icon"></Icon>
-        <template slot="desc">{{ description }}</template>
+        <Icon slot="icon" type="ios-bulb-outline" />
+        <template slot="desc">
+          {{ description }}
+        </template>
       </Alert>
     </div>
   </div>
@@ -36,6 +40,7 @@
 <script>
 export default {
   name: 'Error',
+  // eslint-disable-next-line vue/require-prop-types
   props: ['error'],
   data () {
     return {

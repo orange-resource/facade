@@ -18,10 +18,7 @@ module.exports = {
   },
   srcDir: 'src/',
   router: {
-    routeNameSplitter: '/',
-    scrollBehavior (to, from, savedPosition) {
-      return { x: 0, y: 0 }
-    }
+    routeNameSplitter: '/'
   },
   loading: { color: '#fff' },
   css: [
@@ -37,7 +34,7 @@ module.exports = {
     { src: '@/plugins/axios' }
   ],
   buildModules: [
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
   modules: [
     '@nuxtjs/axios'

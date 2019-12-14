@@ -4,7 +4,7 @@ const jwt = require('../util/jwtUtil')
 const router = express.Router()
 
 router.post('/test', permission, function (req, res) {
-  res.send(jwt.decode(req.headers.authorization))
+  res.json(jwt.decode(req.headers))
 })
 
 module.exports = router

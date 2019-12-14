@@ -22,7 +22,12 @@
 <script>
 export default {
   name: 'Index',
-  middleware: 'userAuth'
+  middleware: 'userAuth',
+  mounted () {
+    this.$axios.$post('/test').then((res) => {
+      console.log(res)
+    })
+  }
 }
 </script>
 

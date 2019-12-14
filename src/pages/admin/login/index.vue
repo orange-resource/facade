@@ -6,13 +6,13 @@
           <h2>橘子后台管理系统</h2>
         </div>
         <div class="content-box">
-          <Input class="input" placeholder="请输入管理员账号">
+          <Input v-model="username" class="input" clearable placeholder="请输入管理员账号">
             <Icon type="ios-contact" slot="prefix" />
           </Input>
-          <Input class="input" type="password" placeholder="请输入管理员密码">
-            <Icon type="md-ionitron"  slot="prefix" />
+          <Input v-model="password" class="input" clearable type="password" placeholder="请输入管理员密码">
+            <Icon type="md-ionitron" slot="prefix" />
           </Input>
-          <Button class="login-button" type="success">登录</Button>
+          <Button class="login-button" type="success" :loading="loading" @click="login()">登录</Button>
         </div>
       </div>
     </div>
@@ -20,8 +20,37 @@
 </template>
 
 <script>
+import cookie from 'js-cookie'
+
 export default {
-  name: 'Index'
+  name: 'Index',
+  data () {
+    return {
+      loading: false,
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      this.loading = true
+      this.$axios.$post('/login', {
+        username: this.username,
+        password: this.password
+      }).then((res) => {
+        this.loading = false
+        if (res.code === 1000) {
+          this.$Message.success('登录成功...正在跳转')
+          cookie.set('token', res.data.token, { expires: 7 })
+          this.$router.push('/admin')
+        } else {
+          this.$Message.info(res.message)
+        }
+      }).catch(() => {
+        this.loading = false
+      })
+    }
+  }
 }
 </script>
 
