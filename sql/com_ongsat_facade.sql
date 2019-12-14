@@ -11,11 +11,22 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 14/12/2019 11:08:32
+ Date: 14/12/2019 17:40:39
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for t_system_config
+-- ----------------------------
+DROP TABLE IF EXISTS `t_system_config`;
+CREATE TABLE `t_system_config` (
+  `id` varchar(255) NOT NULL,
+  `title` varchar(255) DEFAULT NULL COMMENT '网站标题',
+  `description` varchar(255) DEFAULT NULL COMMENT '网站描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
 
 -- ----------------------------
 -- Table structure for t_user

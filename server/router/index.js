@@ -1,5 +1,5 @@
 const login = require('../controller/loginController')
-const test = require('../controller/testController')
+const test = require('../controller/systemController')
 
 function initRouter (express) {
   express.use('/api', login)

@@ -1,10 +1,10 @@
 const express = require('express')
 const permission = require('../middleware/permission')
-const jwt = require('../util/jwtUtil')
+const asyncHandler = require('../util/asyncHandler')
 const router = express.Router()
 
-router.post('/test', permission, function (req, res) {
-  res.json(jwt.decode(req.headers))
-})
+router.post('/system/config/save', permission, asyncHandler(async (req, res, nuxt) => {
+
+}))
 
 module.exports = router
