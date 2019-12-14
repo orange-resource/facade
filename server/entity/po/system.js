@@ -13,6 +13,12 @@ const SystemConfig = sequelize.define('t_system_config', {
   },
   description: {
     type: Sequelize.STRING
+  },
+  pageMainTitle: {
+    type: Sequelize.STRING
+  },
+  pageMainDescription: {
+    type: Sequelize.STRING
   }
 }, { timestamps: false, freezeTableName: true })
 

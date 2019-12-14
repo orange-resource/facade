@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 14/12/2019 17:40:39
+ Date: 14/12/2019 19:50:32
 */
 
 SET NAMES utf8mb4;
@@ -25,6 +25,8 @@ CREATE TABLE `t_system_config` (
   `id` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL COMMENT '网站标题',
   `description` varchar(255) DEFAULT NULL COMMENT '网站描述',
+  `page_main_title` varchar(255) DEFAULT NULL,
+  `page_main_description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
 
@@ -38,12 +40,5 @@ CREATE TABLE `t_user` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理员用户表';
-
--- ----------------------------
--- Records of t_user
--- ----------------------------
-BEGIN;
-INSERT INTO `t_user` VALUES ('11', 'admin', 'admin');
-COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

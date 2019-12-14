@@ -2,6 +2,8 @@
  * 后台全局配置
  * @author orange <1067357662@qq.com>
  */
+const uuidv4 = require('uuid/v4')
+
 const Config = {
   jwt: {
     secret: 'facade',
@@ -21,7 +23,12 @@ const Config = {
     },
     define: {
       'underscored': true,
-      'charset': 'utf8mb4'
+      'charset': 'utf8mb4',
+      hooks: {
+        beforeCreate: (po) => {
+          po.id = uuidv4()
+        }
+      }
     }
   }
 }

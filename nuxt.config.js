@@ -20,7 +20,7 @@ module.exports = {
   router: {
     routeNameSplitter: '/'
   },
-  loading: { color: '#fff' },
+  loading: { color: '#2db7f5' },
   css: [
     'view-design/dist/styles/iview.css',
     '~/assets/css/app.css'
