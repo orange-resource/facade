@@ -42,7 +42,7 @@
           </Row>
         </FormItem>
         <FormItem label="排序" prop="sort">
-          <Input v-model="formValidate.sort" placeholder="请输入排序"></Input>
+          <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
         </FormItem>
         <FormItem label="按钮点击跳转链接" prop="openUrl">
           <Input v-model="formValidate.openUrl"
@@ -133,7 +133,7 @@
             { required: true, message: '请输入', trigger: 'blur' }
           ],
           sort: [
-            { required: true, message: '请输入', trigger: 'blur' }
+            { required: true, type:'number', message: '请输入', trigger: 'blur' }
           ]
         }
       }
@@ -144,7 +144,7 @@
           text: '',
           icon: '',
           openUrl: '',
-          sort: ''
+          sort: 1
         }
       },
       handleSubmit (name) {
@@ -197,10 +197,11 @@
       },
       updateShowDrawer (row) {
         this.isAddData = false
+        this.$refs['formValidate'].resetFields()
         this.formValidate = clone.deep(row)
         this.modal = true
       },
-      updateButton (row) {
+      updateButton () {
         this.submitLoading = true
         this.$axios.$post('/buttonGroup/update', this.formValidate).then((res) => {
           this.submitLoading = false

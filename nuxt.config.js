@@ -39,7 +39,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    prefix: '/api',
+    baseURL: 'http://localhost:9101/api',
     retry: { retries: 2 }
   },
   build: {

@@ -6,6 +6,13 @@
 
 <script>
   export default {
+    asyncData({app}, callback) {
+      app.head.link = [
+        { rel: 'icon', type: 'image/x-icon', href: 'http://www.ongsat.com/favicon.ico' }
+      ]
+      app.head.title = 'new title'
+      callback(null, {})
+    }
   }
 </script>
 
