@@ -9644,11 +9644,6 @@ vue@^2.0.1, vue@^2.6.10:
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
 
-vuejs-avataaars@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.npm.taobao.org/vuejs-avataaars/download/vuejs-avataaars-3.0.9.tgz#108296f3dd752d9011a9b2a45e8acba10cbce8ac"
-  integrity sha1-EIKW8911LZARqbKkXorLoQy86Kw=
-
 vuex@^3.1.1:
   version "3.1.2"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.1.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.1.2.tgz#a2863f4005aa73f2587e55c3fadf3f01f69c7d4d"

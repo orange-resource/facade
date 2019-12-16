@@ -14,6 +14,9 @@ const SystemConfig = sequelize.define('t_system_config', {
   description: {
     type: Sequelize.STRING
   },
+  footerInfo: {
+    type: Sequelize.STRING
+  },
   pageMainTitle: {
     type: Sequelize.STRING
   },

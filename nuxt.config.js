@@ -29,7 +29,6 @@ module.exports = {
     { src: '@/plugins/iview' },
     { src: '@/plugins/component' },
     { src: '@/plugins/svg-icon' },
-    { src: '@/plugins/vuejs-avataaars' },
     { src: '@/plugins/animate' },
     { src: '@/plugins/axios' }
   ],

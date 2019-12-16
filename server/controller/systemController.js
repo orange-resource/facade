@@ -8,7 +8,7 @@ const AsyncLock = require('async-lock');
 const lock = new AsyncLock();
 const router = express.Router()
 
-router.post('/system/config/get', permission, asyncHandler(async (req, res, nuxt) => {
+router.post('/system/config/get', asyncHandler(async (req, res, nuxt) => {
   SystemConfig.findAll().then(configList => {
     res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, configList.length > 0 ? configList[0] : null))
   })
@@ -22,6 +22,7 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
         SystemConfig.update({
           title: req.body.title,
           description: req.body.desc,
+          footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
           pageMainDescription: req.body.pageMainDescription
         }, {
@@ -33,6 +34,7 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
         SystemConfig.create({
           title: req.body.title,
           description: req.body.desc,
+          footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
           pageMainDescription: req.body.pageMainDescription
         }).then(systemConfig => {
