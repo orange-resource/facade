@@ -7,9 +7,17 @@
             <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
           </div>
           <div class="layout-nav">
+            <MenuItem name="buttonGroup2" to="/admin/buttonGroup2">
+              <Icon type="md-list-box" />
+              版块设置
+            </MenuItem>
             <MenuItem name="buttonGroup" to="/admin/buttonGroup">
               <Icon type="md-grid" />
               按钮组设置
+            </MenuItem>
+            <MenuItem name="oss" to="/admin/oss">
+              <Icon type="md-cloud-upload" />
+              图片上传设置
             </MenuItem>
             <MenuItem name="system" to="/admin/system">
               <Icon type="ios-settings" />
@@ -68,7 +76,7 @@
     align-items: center;
   }
   .layout-nav{
-    width: 420px;
+    width: 800px;
     margin: 0 auto;
     margin-right: 20px;
     user-select: none;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-12-16 20:15:25
+Date: 2019-12-16 21:42:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,8 @@ CREATE TABLE `t_aliyun_oss` (
   `key_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `key_secret` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `bucket_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `catalogue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '目录路径'
+  `catalogue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '目录路径',
+  `region` varchar(255) DEFAULT NULL COMMENT 'bucket所在的区域， 默认oss-cn-hangzhou'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='阿里云oss存储对象配置';
 
 -- ----------------------------
