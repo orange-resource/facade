@@ -1,9 +1,11 @@
-const login = require('../controller/loginController')
-const test = require('../controller/systemController')
+const loginController = require('../controller/loginController')
+const systemController = require('../controller/systemController')
+const buttonGroupController = require('../controller/buttonGroupController')
 
 function initRouter (express) {
-  express.use('/api', login)
-  express.use('/api', test)
+  express.use('/api', loginController)
+  express.use('/api', systemController)
+  express.use('/api', buttonGroupController)
 }
 
 module.exports = initRouter

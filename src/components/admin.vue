@@ -7,8 +7,12 @@
             <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
           </div>
           <div class="layout-nav">
+            <MenuItem name="buttonGroup" to="/admin/buttonGroup">
+              <Icon type="md-grid" />
+              按钮组设置
+            </MenuItem>
             <MenuItem name="system" to="/admin/system">
-              <Icon type="ios-construct" />
+              <Icon type="ios-settings" />
               系统设置
             </MenuItem>
           </div>

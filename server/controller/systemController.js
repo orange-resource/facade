@@ -3,9 +3,9 @@ const permission = require('../middleware/permission')
 const asyncHandler = require('../util/asyncHandler')
 const SystemConfig = require('../entity/po/system')
 const Rsp = require('../common/Rsp')
-const AsyncLock = require('async-lock');
+const AsyncLock = require('async-lock')
 
-const lock = new AsyncLock();
+const lock = new AsyncLock()
 const router = express.Router()
 
 router.post('/system/config/get', asyncHandler(async (req, res, nuxt) => {
