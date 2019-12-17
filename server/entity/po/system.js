@@ -22,6 +22,9 @@ const SystemConfig = sequelize.define('t_system_config', {
   },
   pageMainDescription: {
     type: Sequelize.STRING
+  },
+  logoUrl: {
+    type: Sequelize.TEXT
   }
 }, { timestamps: false, freezeTableName: true })
 

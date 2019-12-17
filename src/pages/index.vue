@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="top-box">
-      <h1 class="title">橘子橘子</h1>
+      <h1 class="title">酷简约</h1>
       <div class="description">
         <p>巨嘴234风格电饭锅电饭锅电饭锅的范甘迪发鬼地方个垫付大范甘迪放电饭锅</p>
       </div>
@@ -23,9 +23,9 @@
     <div class="bottom-box">
       <Row type="flex" justify="center">
 
-        <Col class="card-box" :xs="20" :sm="20" :md="20" :lg="20">
+        <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
 
-          <Card v-for="(item,index) in 20" class="card">
+          <Card v-for="(item,index) in 8" :key="'card' + index" class="card">
             <div style="text-align:center">
               <img src="https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png">
               <h3>A high quality UI Toolkit based on Vue.js</h3>
@@ -60,7 +60,7 @@
     width: 100%;
     height: 300px;
     background-color: #2d8cf0;
-    border-bottom: 1px solid #e8eaec;
+    border-bottom: 2px solid #e8eaec;
     display: flex;
     flex-direction: column;
     justify-content: center;

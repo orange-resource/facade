@@ -24,7 +24,8 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
           description: req.body.desc,
           footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
-          pageMainDescription: req.body.pageMainDescription
+          pageMainDescription: req.body.pageMainDescription,
+          logoUrl: req.body.logoUrl
         }, {
           where: { id: configList[0].id }
         }).then(() => {
@@ -36,7 +37,8 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
           description: req.body.desc,
           footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
-          pageMainDescription: req.body.pageMainDescription
+          pageMainDescription: req.body.pageMainDescription,
+          logoUrl: req.body.logoUrl
         }).then(systemConfig => {
           res.json(Rsp.build(Rsp.SUCCEED))
         })

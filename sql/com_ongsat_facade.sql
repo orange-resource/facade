@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 17/12/2019 15:19:51
+ Date: 17/12/2019 19:43:40
 */
 
 SET NAMES utf8mb4;
@@ -73,6 +73,7 @@ CREATE TABLE `t_system_config` (
   `page_main_title` varchar(255) DEFAULT NULL,
   `page_main_description` varchar(255) DEFAULT NULL,
   `footer_info` varchar(255) DEFAULT NULL,
+  `logo_url` text COMMENT '网站logo',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
 

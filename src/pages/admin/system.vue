@@ -5,6 +5,9 @@
             :model="formValidate"
             :rules="ruleValidate"
             :label-width="150">
+        <FormItem label="网站logo" prop="logoUrl">
+          <upload></upload>
+        </FormItem>
         <FormItem label="网站标题" prop="title">
           <Input v-model="formValidate.title" placeholder="输入您的网站标题"></Input>
         </FormItem>

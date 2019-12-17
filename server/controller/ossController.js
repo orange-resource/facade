@@ -39,9 +39,9 @@ router.post('/oss/upload', permission, asyncHandler(async (req, res, nuxt) => {
 
         uploadSingle(req, res, (err) => {
           if(err instanceof multer.MulterError) {
-            res.json(Rsp.build(Rsp.FAIL))
+            res.json(Rsp.build(Rsp.UPLOAD_FAIL))
           } else if(err) {
-            res.json(Rsp.build(Rsp.FAIL))
+            res.json(Rsp.build(Rsp.UPLOAD_FAIL))
           } else {
             const ossConfig = configList[0].dataValues
             ossConfig.catalogue = ossConfig.catalogue + '/' + req.file.filename
@@ -53,7 +53,7 @@ router.post('/oss/upload', permission, asyncHandler(async (req, res, nuxt) => {
                   ossConfig.domainName + '/' + ossConfig.catalogue
                 ))
               } else {
-                res.json(Rsp.build(Rsp.FAIL))
+                res.json(Rsp.build(Rsp.UPLOAD_FAIL))
               }
             })
           }

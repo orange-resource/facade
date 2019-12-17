@@ -50,6 +50,10 @@ const Rsp = {
     code: 2002,
     message: '请先配置阿里云OSS'
   },
+  UPLOAD_FAIL: {
+    code: 2003,
+    message: '上传失败'
+  },
 
   build (code, data) {
     if (undefined === data) {
