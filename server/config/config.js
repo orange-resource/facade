@@ -14,8 +14,8 @@ const Config = {
     port: 3306,
     database: 'com_ongsat_facade',
     username: 'root',
-    // password: 'tdcq1998.@@',
-    password: 'root',
+    password: 'tdcq1998.@@',
+    // password: 'root',
     pool: {
       max: 30,
       min: 5,

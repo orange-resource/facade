@@ -46,6 +46,10 @@ const Rsp = {
     code: 2001,
     message: '登录失败, 账号错误或者密码错误'
   },
+  OSS_NULL: {
+    code: 2002,
+    message: '请先配置阿里云OSS'
+  },
 
   build (code, data) {
     if (undefined === data) {

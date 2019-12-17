@@ -70,6 +70,7 @@
 
   export default {
     name: "buttonGroup",
+    middleware: 'userAuth',
     mounted () {
       this.getButtonGroupList()
     },

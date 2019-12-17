@@ -42,6 +42,7 @@
   export default {
     name: 'system',
     layout: 'admin',
+    middleware: 'userAuth',
     mounted () {
       this.getConfig()
     },

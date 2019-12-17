@@ -5,25 +5,26 @@
             :model="formValidate"
             :rules="ruleValidate"
             :label-width="150">
-        <FormItem label="网站标题" prop="title">
-          <Input v-model="formValidate.title" placeholder="输入您的网站标题"></Input>
+        <FormItem label="图片前缀域名" prop="domainName">
+          <Input v-model="formValidate.domainName" placeholder="请输入图片前缀域名"></Input>
         </FormItem>
-        <FormItem label="网站描述" prop="desc">
-          <Input v-model="formValidate.desc"
-                 type="textarea"
-                 :autosize="{minRows: 2,maxRows: 5}"
-                 show-word-limit
-                 maxlength="250"
-                 placeholder="输入您的网站描述..."></Input>
+        <FormItem label="endpoint" prop="endpoint">
+          <Input v-model="formValidate.endpoint" placeholder="请输入endpoint"></Input>
         </FormItem>
-        <FormItem label="网站底部信息" prop="footerInfo">
-          <Input v-model="formValidate.footerInfo" placeholder="输入您的网站底部信息"></Input>
+        <FormItem label="keyId" prop="keyId">
+          <Input v-model="formValidate.keyId" placeholder="请输入keyId"></Input>
         </FormItem>
-        <FormItem label="主页面中标题" prop="pageMainTitle">
-          <Input v-model="formValidate.pageMainTitle" placeholder="请输入主页面中标题"></Input>
+        <FormItem label="keySecret" prop="keySecret">
+          <Input v-model="formValidate.keySecret" placeholder="请输入keySecret"></Input>
         </FormItem>
-        <FormItem label="主页面中简短描述" prop="pageMainDescription">
-          <Input v-model="formValidate.pageMainDescription" placeholder="请输入主页面中简短描述"></Input>
+        <FormItem label="bucketName" prop="bucketName">
+          <Input v-model="formValidate.bucketName" placeholder="请输入bucketName"></Input>
+        </FormItem>
+        <FormItem label="oss目录路径" prop="catalogue">
+          <Input v-model="formValidate.catalogue" placeholder="请输入目录路径"></Input>
+        </FormItem>
+        <FormItem label="bucket所在的区域" prop="region">
+          <Input v-model="formValidate.region" placeholder="请输入bucket所在的区域"></Input>
         </FormItem>
         <FormItem>
           <Button type="primary"
@@ -42,40 +43,48 @@
   export default {
     name: 'oss',
     layout: 'admin',
+    middleware: 'userAuth',
     mounted () {
       this.getConfig()
     },
     data () {
       return {
         breadcrumb: [
-          { title: '系统设置' }
+          { title: '阿里云oss设置' }
         ],
         loading: false,
         submitLoading: false,
         formValidate: {
-          title: '',
-          desc: '',
-          footerInfo: '',
-          pageMainTitle: '',
-          pageMainDescription: ''
+          domainName: '',
+          endpoint: '',
+          keyId: '',
+          keySecret: '',
+          bucketName: '',
+          catalogue: '',
+          region: ''
         },
         ruleValidate: {
-          title: [
-            { required: true, message: '请输入网站标题才能提交哟', trigger: 'blur' }
+          domainName: [
+            { required: true, message: '请输入', trigger: 'blur' }
           ],
-          footerInfo: [
-            { required: true, message: '请输入网站底部信息才能提交哟', trigger: 'blur' }
+          endpoint: [
+            { required: true, message: '请输入', trigger: 'blur' }
           ],
-          desc: [
-            { required: true, message: '请输入网站描述才能提交哟', trigger: 'blur' },
-            { type: 'string', min: 1, message: '网站描述字符数最少为1哟', trigger: 'blur' }
+          keyId: [
+            { required: true, message: '请输入', trigger: 'blur' }
           ],
-          pageMainTitle: [
-            { required: true, message: '请输入主页面中标题才能提交哟', trigger: 'blur' }
+          keySecret: [
+            { required: true, message: '请输入', trigger: 'blur' }
           ],
-          pageMainDescription: [
-            { required: true, message: '请输入主页面中简短描述才能提交哟', trigger: 'blur' }
-          ]
+          bucketName: [
+            { required: true, message: '请输入', trigger: 'blur' }
+          ],
+          catalogue: [
+            { required: true, message: '请输入', trigger: 'blur' }
+          ],
+          region: [
+            { required: true, message: '请输入', trigger: 'blur' }
+          ],
         }
       }
     },
@@ -92,27 +101,23 @@
       },
       getConfig () {
         this.loading = true
-        this.$axios.$post('/system/config/get').then(res => {
+        this.$axios.$post('/oss/get').then(res => {
           this.loading = false
           if (res.code === 3) {
             if (res.data !== null) {
-              this.formValidate.title = res.data.title
-              this.formValidate.desc = res.data.description
-              this.formValidate.footerInfo = res.data.footerInfo
-              this.formValidate.pageMainTitle = res.data.pageMainTitle
-              this.formValidate.pageMainDescription = res.data.pageMainDescription
+              this.formValidate = res.data
             }
           } else {
             this.$Message.info(res.message)
           }
         }).catch(() => {
           this.loading = false
-          this.$Message.error('获取系统配置发生了未知错误')
+          this.$Message.error('获取oss配置发生了未知错误')
         })
       },
       saveConfig () {
         this.submitLoading = true
-        this.$axios.$post('/system/config/save', this.formValidate).then(res => {
+        this.$axios.$post('/oss/save', this.formValidate).then(res => {
           this.submitLoading = false
           if (res.code === 1) {
             this.$Message.success(res.message)
@@ -121,7 +126,7 @@
           }
         }).catch(() => {
           this.submitLoading = false
-          this.$Message.error('保存系统配置发生了未知错误')
+          this.$Message.error('保存oss配置发生了未知错误')
         })
       }
     }

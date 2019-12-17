@@ -82,3 +82,6 @@ sw.*
 
 # Mac OSX
 .DS_Store
+
+upload
+/upload
