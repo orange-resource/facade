@@ -49,7 +49,7 @@ router.post('/oss/upload', permission, asyncHandler(async (req, res, nuxt) => {
             OssUtil.upload(ossConfig).then((result) => {
               if (result) {
                 res.json(Rsp.build(
-                  Rsp.SUCCEED,
+                  Rsp.UPLOAD_SUCCEED,
                   ossConfig.domainName + '/' + ossConfig.catalogue
                 ))
               } else {

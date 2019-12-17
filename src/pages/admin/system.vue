@@ -6,7 +6,7 @@
             :rules="ruleValidate"
             :label-width="150">
         <FormItem label="网站logo" prop="logoUrl">
-          <upload></upload>
+          <upload-img :limit="1" :urlList="urlList" @on-success="uploadSuccess"></upload-img>
         </FormItem>
         <FormItem label="网站标题" prop="title">
           <Input v-model="formValidate.title" placeholder="输入您的网站标题"></Input>
@@ -54,9 +54,11 @@
         breadcrumb: [
           { title: '系统设置' }
         ],
+        urlList: [],
         loading: false,
         submitLoading: false,
         formValidate: {
+          logoUrl: '',
           title: '',
           desc: '',
           footerInfo: '',
@@ -64,6 +66,9 @@
           pageMainDescription: ''
         },
         ruleValidate: {
+          logoUrl: [
+            { required: true, message: '请上传logo哟', trigger: 'blur' }
+          ],
           title: [
             { required: true, message: '请输入网站标题才能提交哟', trigger: 'blur' }
           ],
@@ -84,7 +89,13 @@
       }
     },
     methods: {
+      uploadSuccess (url) {
+        this.formValidate.logoUrl = url
+      },
       handleSubmit (name) {
+        if (this.urlList.length === 0) {
+          this.formValidate.logoUrl = ''
+        }
         this.$refs[name].validate((valid) => {
           if (valid) {
             this.saveConfig()
@@ -100,11 +111,14 @@
           this.loading = false
           if (res.code === 3) {
             if (res.data !== null) {
+              this.formValidate.logoUrl = res.data.logoUrl
+              this.urlList.push(res.data.logoUrl)
               this.formValidate.title = res.data.title
               this.formValidate.desc = res.data.description
               this.formValidate.footerInfo = res.data.footerInfo
               this.formValidate.pageMainTitle = res.data.pageMainTitle
               this.formValidate.pageMainDescription = res.data.pageMainDescription
+              this.$forceUpdate()
             }
           } else {
             this.$Message.info(res.message)

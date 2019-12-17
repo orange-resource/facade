@@ -38,6 +38,10 @@ const Rsp = {
     code: 1000,
     message: '登录成功'
   },
+  UPLOAD_SUCCEED: {
+    code: 1001,
+    message: '上传成功'
+  },
   TOKEN_NULL: {
     code: 2000,
     message: '认证失败'
