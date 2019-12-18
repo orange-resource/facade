@@ -5,19 +5,13 @@
       <div class="description">
         <p>{{ systemConfig.pageMainDescription }}</p>
       </div>
-      <div class="button-group button-group-media">
-        <Button class="button">
-          <Icon type="ios-arrow-back"></Icon>
-          Backward
-        </Button>
-        <Button class="button">
-          <Icon type="ios-arrow-back"></Icon>
-          Backward
-        </Button>
-        <Button class="button">
-          <Icon type="ios-arrow-back"></Icon>
-          Backward
-        </Button>
+      <div v-if="buttonGroup.length > 0" class="button-group button-group-media">
+        <nuxt-link v-for="(item,index) in buttonGroup" :key="'button' + index" :to="item.openUrl" target="_blank">
+          <Button class="button">
+            <Icon :type="item.icon"></Icon>
+            {{ item.text }}
+          </Button>
+        </nuxt-link>
       </div>
     </div>
     <div v-if="systemConfig === null" class="top-box">
@@ -60,6 +54,7 @@
 
       const data = {
         systemConfig: null,
+        buttonGroup: [],
         sectionList: []
       }
 
@@ -82,6 +77,15 @@
                 { hid: 'description', name: 'description', content: da.data.description }
               ]
             }
+          }
+        }
+      })
+
+      await content.app.$axios.post('/buttonGroup/getList').then((res) => {
+        if (res.status === 200) {
+          const da = res.data
+          if (da.code === 200) {
+            data.buttonGroup = da.data
           }
         }
       })
