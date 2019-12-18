@@ -173,7 +173,7 @@
         this.loading = true
         this.$axios.$post('/buttonGroup/getList').then((res) => {
           this.loading = false
-          if (res.code === 3) {
+          if (res.code === 200) {
             this.data = res.data
           } else {
             this.$Message.info(res.message)
@@ -192,7 +192,7 @@
         this.submitLoading = true
         this.$axios.$post('/buttonGroup/create', this.formValidate).then((res) => {
           this.submitLoading = false
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getButtonGroupList()
           } else {
@@ -213,7 +213,7 @@
         this.submitLoading = true
         this.$axios.$post('/buttonGroup/update', this.formValidate).then((res) => {
           this.submitLoading = false
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getButtonGroupList()
           } else {
@@ -228,7 +228,7 @@
         this.$axios.$post('/buttonGroup/delete', {
           id: id
         }).then((res) => {
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getButtonGroupList()
           } else {

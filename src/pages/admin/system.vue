@@ -109,7 +109,7 @@
         this.loading = true
         this.$axios.$post('/system/config/get').then(res => {
           this.loading = false
-          if (res.code === 3) {
+          if (res.code === 200) {
             if (res.data !== null) {
               this.$nextTick(() => {
                 this.formValidate.logoUrl = res.data.logoUrl
@@ -133,7 +133,7 @@
         this.submitLoading = true
         this.$axios.$post('/system/config/save', this.formValidate).then(res => {
           this.submitLoading = false
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
           } else {
             this.$Message.info(res.message)

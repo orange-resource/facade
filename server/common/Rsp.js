@@ -7,19 +7,19 @@
  */
 const Rsp = {
   SUCCEED: {
-    code: 1,
+    code: 200,
     message: '操作成功'
   },
   FAIL: {
-    code: 2,
+    code: 202,
     message: '操作失败'
   },
   SEARCH_SUCCESSFUL: {
-    code: 3,
+    code: 200,
     message: '查询成功'
   },
   PARAMETER_ERROR: {
-    code: 4,
+    code: 400,
     message: '参数错误'
   },
   CANNOT_FIND: {

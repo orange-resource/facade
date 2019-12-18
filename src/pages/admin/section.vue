@@ -255,7 +255,7 @@
         this.loading = true
         this.$axios.$post('/section/getList').then((res) => {
           this.loading = false
-          if (res.code === 3) {
+          if (res.code === 200) {
             for (let i = 0, arr = res.data; i < arr.length; i++) {
               arr[i].showStatusBool = arr[i].showStatus === 1
               arr[i].onStatusBool = arr[i].onStatus === 1
@@ -281,7 +281,7 @@
         this.submitLoading = true
         this.$axios.$post('/section/create', this.formValidate).then((res) => {
           this.submitLoading = false
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getSectionList()
           } else {
@@ -302,7 +302,7 @@
         this.submitLoading = true
         this.$axios.$post('/section/update', this.formValidate).then((res) => {
           this.submitLoading = false
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getSectionList()
           } else {
@@ -317,7 +317,7 @@
         this.$axios.$post('/section/delete', {
           id: id
         }).then((res) => {
-          if (res.code === 1) {
+          if (res.code === 200) {
             this.$Message.success(res.message)
             this.getSectionList()
           } else {
