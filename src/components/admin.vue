@@ -8,7 +8,7 @@
             <span class="title">橘子软件</span>
           </div>
           <div class="layout-nav">
-            <MenuItem name="section" to="/admin/section">
+            <MenuItem name="sectionPage" to="/admin/section">
               <Icon type="md-list-box" />
               版块设置
             </MenuItem>
