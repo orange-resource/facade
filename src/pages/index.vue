@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div class="top-box">
-      <h1 class="title">酷简约</h1>
+    <div v-if="systemConfig !== null" class="top-box">
+      <h1 class="title">{{ systemConfig.pageMainTitle }}</h1>
       <div class="description">
-        <p>巨嘴234风格电饭锅电饭锅电饭锅的范甘迪发鬼地方个垫付大范甘迪放电饭锅</p>
+        <p>{{ systemConfig.pageMainDescription }}</p>
       </div>
       <div class="button-group button-group-media">
         <Button class="button">
@@ -20,7 +20,12 @@
         </Button>
       </div>
     </div>
-    <div class="bottom-box">
+    <div v-if="systemConfig === null" class="top-box">
+      <none>
+        <span class="none-span">空空如也...</span>
+      </none>
+    </div>
+    <div v-if="sectionList.length > 0" class="bottom-box">
       <Row type="flex" justify="center">
 
         <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
@@ -36,18 +41,52 @@
 
       </Row>
     </div>
-    <div class="footer">@ jusdnfds</div>
+    <div v-if="sectionList.length === 0" class="bottom-box">
+      <none>
+        <span class="none-span" style="color: #909399">空空如也...</span>
+      </none>
+    </div>
+    <div class="footer">
+      <span v-if="systemConfig !== null">
+        {{ systemConfig.footerInfo }}
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    asyncData({app}, callback) {
-      app.head.link = [
-        { rel: 'icon', type: 'image/x-icon', href: 'http://www.ongsat.com/favicon.ico' }
-      ]
-      app.head.title = 'new title2'
-      callback(null, {})
+    async asyncData(content) {
+
+      const data = {
+        systemConfig: null,
+        sectionList: []
+      }
+
+      await content.app.$axios.post('/system/config/get').then((res) => {
+        if (res.status === 200) {
+          const da = res.data
+          if (da.code === 200) {
+            if (da.data !== null) {
+              data.systemConfig = da.data
+              content.app.head.link = [
+                { rel: 'icon',
+                  type: 'image/x-icon',
+                  href: da.data.logoUrl
+                }
+              ]
+              content.app.head.title = da.data.title
+              content.app.head.meta = [
+                { charset: 'utf-8' },
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { hid: 'description', name: 'description', content: da.data.description }
+              ]
+            }
+          }
+        }
+      })
+
+      return data
     }
   }
 </script>
