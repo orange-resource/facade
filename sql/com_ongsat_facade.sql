@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 17/12/2019 19:43:40
+ Date: 18/12/2019 11:24:48
 */
 
 SET NAMES utf8mb4;
@@ -59,6 +59,7 @@ CREATE TABLE `t_section` (
   `sort` int(255) DEFAULT NULL COMMENT '排序',
   `on_status` int(2) DEFAULT NULL COMMENT '开启访问状态 1=开启访问 2=不开启访问，显示不开启访问的文本',
   `off_text` varchar(255) DEFAULT NULL COMMENT '不开启访问时显示的文本内容，比如可以填写，敬请期待',
+  `main_picture` text COMMENT '主图',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='版块';
 

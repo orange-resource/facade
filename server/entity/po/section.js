@@ -14,7 +14,7 @@ const Section = sequelize.define('t_section', {
   description: {
     type: Sequelize.STRING
   },
-  show_status: {
+  showStatus: {
     type: Sequelize.INTEGER
   },
   openUrl: {
@@ -28,6 +28,9 @@ const Section = sequelize.define('t_section', {
   },
   offText: {
     type: Sequelize.STRING
+  },
+  mainPicture: {
+    type: Sequelize.TEXT
   }
 }, { timestamps: false, freezeTableName: true })
 

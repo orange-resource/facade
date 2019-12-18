@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    2
   </div>
 </template>
 
@@ -10,9 +9,7 @@
     layout: 'admin',
     middleware: 'userAuth',
     mounted () {
-      this.$axios.$post('/test').then((res) => {
-        console.log(res)
-      })
+      this.$router.push('/admin/section')
     }
   }
 </script>

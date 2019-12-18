@@ -4,7 +4,7 @@
       <ButtonGroup>
         <Button type="primary" @click="createShowDrawer()">
           <Icon type="md-add-circle" />
-          新增按钮
+          新增版块
         </Button>
       </ButtonGroup>
       <Table :loading="loading" border :columns="columns" :data="data" :stripe="true" style="margin-top: 10px">
@@ -13,7 +13,7 @@
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="primary" size="small" style="margin-right: 5px" @click="updateShowDrawer(row)">编辑</Button>
-          <Button type="error" size="small" @click="deleteButton(row.id)">删除</Button>
+          <Button type="error" size="small" @click="deleteSection(row.id)">删除</Button>
         </template>
       </Table>
     </admin>
@@ -25,31 +25,34 @@
       :styles="styles"
     >
 
-      <Form ref="formValidate"
+      <Form
+            style="margin-bottom: 60px"
+            ref="formValidate"
             :model="formValidate"
             :rules="ruleValidate"
             :label-width="150">
-        <FormItem label="按钮显示文本" prop="text">
-          <Input v-model="formValidate.text" placeholder="输入按钮显示文本"></Input>
+        <FormItem label="版块主图" prop="mainPicture">
+          <upload-img :limit="1" :urlList="urlList" @on-success="uploadSuccess"></upload-img>
         </FormItem>
-        <FormItem label="按钮icon" prop="icon">
-          <Row>
-            <Col span="18">
-              <Input v-model="formValidate.icon" placeholder="输入按钮icon"></Input>
-            </Col>
-            <Col span="4" offset="1">
-              <Icon :type="formValidate.icon" size="50" />
-            </Col>
-          </Row>
+        <FormItem label="版块名称" prop="name">
+          <Input v-model="formValidate.name" placeholder="请输入版块名称"></Input>
+        </FormItem>
+        <FormItem label="版块描述" prop="description">
+          <Input v-model="formValidate.description"
+                 type="textarea"
+                 show-word-limit
+                 maxlength="500"
+                 :autosize="{minRows: 2,maxRows: 5}"
+                 placeholder="输入点击跳转链接..."></Input>
         </FormItem>
         <FormItem label="排序" prop="sort">
           <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
         </FormItem>
-        <FormItem label="按钮点击跳转链接" prop="openUrl">
+        <FormItem label="点击跳转链接" prop="openUrl">
           <Input v-model="formValidate.openUrl"
                  type="textarea"
                  :autosize="{minRows: 2,maxRows: 5}"
-                 placeholder="输入按钮点击跳转链接..."></Input>
+                 placeholder="输入点击跳转链接..."></Input>
         </FormItem>
       </Form>
 
@@ -70,15 +73,15 @@
   import clone from '~/assets/util/clone'
 
   export default {
-    name: "buttonGroup",
+    name: "section",
     middleware: 'userAuth',
     mounted () {
-      this.getButtonGroupList()
+      this.getSectionList()
     },
     data () {
       return {
         breadcrumb: [
-          { title: '按钮组设置' }
+          { title: '版块设置' }
         ],
         styles: {
           height: 'calc(100% - 55px)',
@@ -86,6 +89,7 @@
           paddingBottom: '53px',
           position: 'static'
         },
+        urlList: [],
         modal: false,
         loading: false,
         submitLoading: false,
@@ -149,19 +153,26 @@
     methods: {
       getData () {
         return {
+          mainPicture: '',
           text: '',
           icon: '',
           openUrl: '',
           sort: 1
         }
       },
+      uploadSuccess (url) {
+        this.formValidate.logoUrl = url
+      },
       handleSubmit (name) {
+        if (this.urlList.length === 0) {
+          this.formValidate.logoUrl = ''
+        }
         this.$refs[name].validate((valid) => {
           if (valid) {
             if (this.isAddData) {
-              this.createButton()
+              this.createSection()
             } else {
-              this.updateButton()
+              this.updateSection()
             }
           }
         })
@@ -169,9 +180,9 @@
       handleReset (name) {
         this.$refs[name].resetFields();
       },
-      getButtonGroupList () {
+      getSectionList () {
         this.loading = true
-        this.$axios.$post('/buttonGroup/getList').then((res) => {
+        this.$axios.$post('/section/getList').then((res) => {
           this.loading = false
           if (res.code === 3) {
             this.data = res.data
@@ -180,7 +191,7 @@
           }
         }).catch(() => {
           this.loading = false
-          this.$Message.error('获取按钮组数据发生了未知错误')
+          this.$Message.error('获取版块数据发生了未知错误')
         })
       },
       createShowDrawer () {
@@ -188,9 +199,9 @@
         this.formValidate = this.getData()
         this.modal = true
       },
-      createButton () {
+      createSection () {
         this.submitLoading = true
-        this.$axios.$post('/buttonGroup/create', this.formValidate).then((res) => {
+        this.$axios.$post('/section/create', this.formValidate).then((res) => {
           this.submitLoading = false
           if (res.code === 1) {
             this.$Message.success(res.message)
@@ -200,7 +211,7 @@
           }
         }).catch(() => {
           this.submitLoading = false
-          this.$Message.error('新增按钮发生了未知错误')
+          this.$Message.error('新增版块发生了未知错误')
         })
       },
       updateShowDrawer (row) {
@@ -209,9 +220,9 @@
         this.formValidate = clone.deep(row)
         this.modal = true
       },
-      updateButton () {
+      updateSection () {
         this.submitLoading = true
-        this.$axios.$post('/buttonGroup/update', this.formValidate).then((res) => {
+        this.$axios.$post('/section/update', this.formValidate).then((res) => {
           this.submitLoading = false
           if (res.code === 1) {
             this.$Message.success(res.message)
@@ -221,11 +232,11 @@
           }
         }).catch(() => {
           this.submitLoading = false
-          this.$Message.error('编辑按钮发生了未知错误')
+          this.$Message.error('编辑版块发生了未知错误')
         })
       },
-      deleteButton (id) {
-        this.$axios.$post('/buttonGroup/delete', {
+      deleteSection (id) {
+        this.$axios.$post('/section/delete', {
           id: id
         }).then((res) => {
           if (res.code === 1) {
@@ -235,7 +246,7 @@
             this.$Message.info(res.message)
           }
         }).catch(() => {
-          this.$Message.error('删除按钮发生了未知错误')
+          this.$Message.error('删除版块发生了未知错误')
         })
       }
     }
