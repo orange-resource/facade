@@ -111,14 +111,15 @@
           this.loading = false
           if (res.code === 3) {
             if (res.data !== null) {
-              this.formValidate.logoUrl = res.data.logoUrl
-              this.urlList.push(res.data.logoUrl)
-              this.formValidate.title = res.data.title
-              this.formValidate.desc = res.data.description
-              this.formValidate.footerInfo = res.data.footerInfo
-              this.formValidate.pageMainTitle = res.data.pageMainTitle
-              this.formValidate.pageMainDescription = res.data.pageMainDescription
-              this.$forceUpdate()
+              this.$nextTick(() => {
+                this.formValidate.logoUrl = res.data.logoUrl
+                this.urlList.push(res.data.logoUrl)
+                this.formValidate.title = res.data.title
+                this.formValidate.desc = res.data.description
+                this.formValidate.footerInfo = res.data.footerInfo
+                this.formValidate.pageMainTitle = res.data.pageMainTitle
+                this.formValidate.pageMainDescription = res.data.pageMainDescription
+              })
             }
           } else {
             this.$Message.info(res.message)

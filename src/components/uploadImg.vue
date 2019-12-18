@@ -1,17 +1,10 @@
 <template>
   <div>
-    <div class="demo-upload-list" v-for="item in uploadList">
-      <template v-if="item.status === 'finished'">
-        <img :src="item.url">
-        <div class="demo-upload-list-cover">
-          <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-        </div>
-      </template>
-      <template v-else>
-        <Progress v-if="item.showProgress" :percent="item.percentage">
-          <span>正在上传</span>
-        </Progress>
-      </template>
+    <div class="demo-upload-list" v-for="item in urlList">
+      <img :src="item">
+      <div class="demo-upload-list-cover">
+        <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+      </div>
     </div>
     <Upload
       ref="upload"
@@ -45,11 +38,6 @@
         type: Array
       }
     },
-    data () {
-      return {
-        uploadList: []
-      }
-    },
     methods: {
       getUrlListIndex () {
         const fileList = this.$refs.upload.fileList;
@@ -62,24 +50,14 @@
           }
         }
       },
-      handleRemove (file) {
-        const fileList = this.$refs.upload.fileList;
-
+      handleRemove (url) {
         this.urlList.splice(this.getUrlListIndex(), 1)
-
-        this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
       },
       handleSuccess (res, file) {
         if (res.data !== null) {
-          file.status = 'finished'
-          file.url = res.data
           this.urlList.push(res.data)
           this.$Message.success(res.message)
           this.$emit('on-success', res.data)
-        } else {
-          const fileList = this.$refs.upload.fileList;
-          this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
-          this.$Message.info(res.message)
         }
       },
       handleFormatError (file) {
@@ -93,16 +71,13 @@
         if (this.limit === -1) {
           return true
         }
-        const check = this.uploadList.length >= this.limit;
+        const check = this.urlList.length >= this.limit;
         if (check) {
           this.$Message.info('图片只能上传' + this.limit + '张哟!!!')
           return false
         }
         return true;
       }
-    },
-    mounted () {
-      this.uploadList = this.$refs.upload.fileList;
     }
   }
 </script>
