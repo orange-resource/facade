@@ -4,7 +4,8 @@
       <Header>
         <Menu mode="horizontal" theme="dark" :active-name="name">
           <div class="layout-logo">
-            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+            <Avatar src="/favicon.ico" />
+            <span class="title">橘子软件</span>
           </div>
           <div class="layout-nav">
             <MenuItem name="buttonGroup2" to="/admin/buttonGroup2">
@@ -63,6 +64,11 @@
     background: #f5f7f9;
     position: relative;
     overflow: hidden;
+  }
+  .title {
+    color: #ffffff;
+    font-weight: 600;
+    margin-left: 10px;
   }
   .layout-logo{
     width: 100px;
