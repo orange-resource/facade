@@ -31,7 +31,8 @@ module.exports = {
     { src: '@/plugins/component' },
     { src: '@/plugins/svg-icon' },
     { src: '@/plugins/animate' },
-    { src: '@/plugins/axios' }
+    { src: '@/plugins/axios' },
+    { src: '@/plugins/vue-lazyload' }
   ],
   buildModules: [
   ],

@@ -1,21 +1,24 @@
 <template>
   <Card class="card">
     <div class="box">
-      <img src="https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png">
-      <h3>A high quality UI Toolkit based on Vue.js</h3>
-      <p>
-        A high quality UI Toolkit based on Vue.js
-        A high quality UI Toolkit based on Vue.js
-        A high quality UI Toolkit based on Vue.js
-      </p>
+      <img v-lazy="data.mainPicture">
+      <h3>{{ data.name }}</h3>
+      <p>{{ data.description }}</p>
     </div>
-    <div class="off-box">该功能还未上线，敬请期待</div>
+    <div v-if="data.onStatus === 2" class="off-box">
+      {{ data.offText }}
+    </div>
   </Card>
 </template>
 
 <script>
   export default {
-    name: 'sectionBox'
+    name: 'sectionBox',
+    props: {
+      data: {
+        type: Object
+      }
+    }
   }
 </script>
 
@@ -36,9 +39,13 @@
       }
       h3 {
         margin-top: 10px;
+        color: #17233d;
+        font-weight: 600;
       }
       p {
         margin-top: 5px;
+        color: #515a6e;
+        font-weight: 400;
       }
     }
 
@@ -52,7 +59,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: 600;
+      font-weight: 900;
       color: #515a6e;
     }
   }

@@ -24,14 +24,13 @@
 
         <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
 
-          <section-box></section-box>
-
-          <Card v-for="(item,index) in 8" :key="'card' + index" class="card">
-            <div style="text-align:center">
-              <img src="https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png">
-              <h3>A high quality UI Toolkit based on Vue.js</h3>
-            </div>
-          </Card>
+          <a-link v-for="(item,index) in sectionList"
+                  v-if="item.showStatus === 1"
+                  :key="'card' + index"
+                  :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
+                  :target="item.onStatus === 1 ? '_blank' : '_self'">
+            <section-box :data="item"></section-box>
+          </a-link>
 
         </Col>
 
