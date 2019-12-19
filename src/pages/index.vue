@@ -46,6 +46,37 @@
         {{ systemConfig.footerInfo }}
       </span>
     </div>
+
+    <div class="concat-container">
+      <div class="concat-box animated flipInX delay-1s">
+<!--        <el-popover-->
+<!--          class="concat-box-popover"-->
+<!--          placement="right-start"-->
+<!--          title="二维码"-->
+<!--          width="200"-->
+<!--          trigger="hover">-->
+<!--          <div>-->
+<!--            <img-->
+<!--              width="100%"-->
+<!--              src="https://qr.api.cli.im/qr?data=qq&level=H&transparent=0&bgcolor=%23FFFFFF&forecolor=&blockpixel=12&marginblock=2&logourl=&size=400&text=&logoshape=no&fontsize=30&fontfamily=msyh.ttf&fontcolor=&incolor=&outcolor=&qrcode_eyes=&background=images%2Fbackground%2Fbg19.png&wper=0.62&hper=0.62&tper=0.28&lper=0.19&eye_use_fore=1&qrpad=10&kid=bizcliim&time=1575604825&key=72af07a7cf906c7b7cd40563f11b19a9">-->
+<!--          </div>-->
+<!--          <icon slot="reference" id="concat-icon" name="qq" scale="5"></icon>-->
+<!--        </el-popover>-->
+<!--        <el-popover-->
+<!--          class="concat-box-popover"-->
+<!--          placement="right-start"-->
+<!--          title="二维码"-->
+<!--          width="200"-->
+<!--          trigger="hover">-->
+<!--          <div>-->
+<!--            <img-->
+<!--              width="100%"-->
+<!--              src="https://qr.api.cli.im/qr?data=qq&level=H&transparent=false&bgcolor=%23FFFFFF&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=1891ffac061c0c5abab3b58092883ea2">-->
+<!--          </div>-->
+<!--          <icon slot="reference" id="concat-icon" name="wechat" scale="5"></icon>-->
+<!--        </el-popover>-->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -177,6 +208,24 @@
       width: 320px;
     }
   }
+
+  .concat-container {
+    position: fixed;
+    right: 20px;
+    top: 35%;
+    .concat-box {
+      display: flex;
+      flex-direction: column;
+      #concat-icon {
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .concat-box-popover:nth-child(n+2) {
+        margin-top: 10px;
+      }
+    }
+  }
+
   .footer {
     margin-top: 50px;
     height: 100px;
