@@ -11,8 +11,9 @@ const permission = async (req, res, next) => {
       const decode = jwt.decode(token)
       if (decode === null) {
         res.json(Rsp.build(Rsp.TOKEN_NULL))
+      } else {
+        next()
       }
-      next()
     } else {
       res.json(Rsp.build(Rsp.TOKEN_NULL))
     }

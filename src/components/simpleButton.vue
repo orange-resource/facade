@@ -1,0 +1,49 @@
+<template>
+  <button class="button">
+    <Icon :type="icon" size="30" />
+    <span class="text">
+      {{ text }}
+    </span>
+  </button>
+</template>
+
+<script>
+  export default {
+    name: 'simpleButton',
+    props: {
+      icon: {
+        type: String
+      },
+      text: {
+        type: String
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .button {
+    margin: 0;
+    outline: none;
+
+    width: 120px;
+    height: 40px;
+
+    background-color: #ffffff;
+    border: none;
+    color: #2d8cf0;
+    padding: 2px;
+    font-size: 16px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .text {
+      margin-left: 5px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+</style>
