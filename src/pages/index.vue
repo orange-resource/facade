@@ -24,6 +24,8 @@
 
         <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
 
+          <section-box></section-box>
+
           <Card v-for="(item,index) in 8" :key="'card' + index" class="card">
             <div style="text-align:center">
               <img src="https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png">
