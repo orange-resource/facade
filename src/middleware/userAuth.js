@@ -18,18 +18,14 @@ const util = {
 export default function ({ route, req, res, redirect }) {
   const isClient = process.client
   const isServer = process.server
-  const redirectURL = '/admin/login'
   let token
-  // 在服务端
   if (isServer) {
     token = util.getTokenInServer(req)
   }
-  // 在客户端判读是否需要登陆
   if (isClient) {
     token = util.getTokenInClient()
   }
-  // 需要进行权限判断的页面开头
   if (token === null) {
-    redirect(redirectURL)
+    redirect('/admin/login')
   }
 }

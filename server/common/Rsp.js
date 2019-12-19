@@ -44,7 +44,7 @@ const Rsp = {
   },
   TOKEN_NULL: {
     code: 2000,
-    message: '认证失败'
+    message: '请登录系统'
   },
   LOGIN_ERROR: {
     code: 2001,

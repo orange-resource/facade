@@ -9,7 +9,9 @@
       </ButtonGroup>
       <Table :loading="loading" border :columns="columns" :data="data" :stripe="true" style="margin-top: 10px">
         <template slot-scope="{ row }" slot="mainPicture">
-          <img class="openImage" :src="row.mainPicture" height="100px">
+          <div style="margin: 10px">
+            <img class="openImage" v-lazy="row.mainPicture" height="100px" width="100%">
+          </div>
         </template>
         <template slot-scope="{ row }" slot="showStatus">
           {{ row.showStatus === 1 ? '显示' : '不显示' }}
@@ -99,9 +101,11 @@
   import clone from '~/assets/util/clone'
   import 'viewerjs/dist/viewer.css'
   import Viewer from 'viewerjs'
+  import SectionTableExpand from "./table/sectionTableExpand";
 
   export default {
     name: "sectionPage",
+    components: { SectionTableExpand },
     middleware: 'userAuth',
     mounted () {
       this.getSectionList()
@@ -123,6 +127,17 @@
         isAddData: true,
         columns: [
           {
+            type: 'expand',
+            width: 50,
+            render: (h, params) => {
+              return h(SectionTableExpand, {
+                props: {
+                  row: params.row
+                }
+              })
+            }
+          },
+          {
             title: '序号',
             type: 'index',
             width: 100,
@@ -139,45 +154,28 @@
             title: '版块名称',
             key: 'name',
             align: 'center',
-            width: '100'
-          },
-          {
-            title: '版块描述',
-            key: 'description',
-            align: 'center',
-            width: '100'
-          },
-          {
-            title: '打开链接',
-            key: 'openUrl',
-            align: 'center',
-            width: '200'
           },
           {
             title: '排序',
             key: 'sort',
             align: 'center',
-            width: '50'
           },
           {
             title: '显示状态',
             key: 'showStatus',
             slot: 'showStatus',
             align: 'center',
-            width: '100'
           },
           {
             title: '访问状态',
             key: 'onStatus',
             slot: 'onStatus',
             align: 'center',
-            width: '100'
           },
           {
             title: '关闭访问显示文本',
             key: 'offText',
             align: 'center',
-            width: '150'
           },
           {
             title: '操作',

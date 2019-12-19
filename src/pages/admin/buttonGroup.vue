@@ -101,7 +101,6 @@
             title: '按钮显示文本',
             key: 'text',
             align: 'center',
-            width: '400'
           },
           {
             title: '按钮图标',
@@ -114,13 +113,11 @@
             title: '排序',
             key: 'sort',
             align: 'center',
-            width: '100'
           },
           {
             title: '打开链接',
             key: 'openUrl',
             align: 'center',
-            width: '500'
           },
           {
             title: '操作',

@@ -36,6 +36,7 @@
       justify-content: center;
       img {
         height: 260px;
+        border-radius: 5px;
       }
       h3 {
         margin-top: 10px;
