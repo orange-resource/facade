@@ -1,4 +1,8 @@
 
+const env = process.env.NODE_ENV
+const devApi = 'http://localhost:9101/api'
+const proApi = 'http://129.211.52.45:9101/api'
+
 module.exports = {
   mode: 'universal',
   head: {
@@ -40,7 +44,8 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: 'http://localhost:9101/api',
+    baseURL: env === 'development' ?
+      devApi : proApi,
     retry: { retries: 2 }
   },
   build: {
@@ -49,6 +54,8 @@ module.exports = {
   },
   env: {
     qq: '1067357662',
-    weChat: 'xiaocry1314'
+    weChat: 'xiaocry1314',
+    devApi: devApi,
+    proApi: proApi
   }
 }

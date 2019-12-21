@@ -17,7 +17,7 @@
       :before-upload="handleBeforeUpload"
       multiple
       type="drag"
-      action="//localhost:9101/api/oss/upload"
+      :action="action"
       style="display: inline-block;width:120px;">
       <div style="width: 120px;height:120px;line-height: 120px;">
         <Icon type="ios-camera" size="20"></Icon>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+  const api = process.env.NODE_ENV === 'development' ?
+    process.env.devApi : process.env.proApi
   export default {
     name: 'uploadImg',
     props: {
@@ -36,6 +38,11 @@
       },
       urlList: {
         type: Array
+      }
+    },
+    data () {
+      return {
+        action: api + '/oss/upload'
       }
     },
     methods: {
