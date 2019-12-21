@@ -59,7 +59,9 @@
         sectionList: []
       }
 
-      await content.app.$axios.post('/system/config/get').then((res) => {
+      const api = process.env.devApi
+
+      await content.app.$axios.post(api + '/system/config/get').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {
@@ -82,7 +84,7 @@
         }
       })
 
-      await content.app.$axios.post('/buttonGroup/getList').then((res) => {
+      await content.app.$axios.post(api + '/buttonGroup/getList').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {
@@ -91,7 +93,7 @@
         }
       })
 
-      await content.app.$axios.post('/section/getList').then((res) => {
+      await content.app.$axios.post(api + '/section/getList').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {

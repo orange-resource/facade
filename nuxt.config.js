@@ -1,7 +1,7 @@
 
 const env = process.env.NODE_ENV
-const devApi = 'http://localhost:9101/api'
-const proApi = 'http://129.211.52.45:9101/api'
+const devApi = 'http://localhost/api'
+const proApi = 'http://www.ongsat.com/api'
 
 module.exports = {
   mode: 'universal',
@@ -17,7 +17,7 @@ module.exports = {
     ]
   },
   server: {
-    port: 9101,
+    port: 80,
     host: '0.0.0.0'
   },
   srcDir: 'src/',
