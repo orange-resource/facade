@@ -1,6 +1,6 @@
 <template>
   <button class="button">
-    <Icon :type="icon" size="30" />
+    <Icon :type="icon" size="20" />
     <span class="text">
       {{ text }}
     </span>
