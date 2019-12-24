@@ -1,12 +1,12 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header>
+      <Header class="header">
+        <div class="layout-logo">
+          <Avatar src="/favicon.png" />
+          <span class="title">橘子软件</span>
+        </div>
         <Menu mode="horizontal" theme="dark" :active-name="name">
-          <div class="layout-logo">
-            <Avatar src="/favicon.ico" />
-            <span class="title">橘子软件</span>
-          </div>
           <div class="layout-nav">
             <MenuItem name="sectionPage" to="/admin/section">
               <Icon type="md-list-box" />
@@ -28,7 +28,12 @@
         </Menu>
       </Header>
       <Content :style="{padding: '0 50px'}">
-        <Card class="animated jackInTheBox" :style="{margin: '20px 0'}">
+        <Card class="animated bounceInLeft"
+              :bordered="false"
+              :padding="20"
+              :shadow="true"
+              :dis-hover="true"
+              :style="{margin: '20px 0'}">
           <div style="min-height: 200px;">
             <Breadcrumb style="margin-bottom: 20px">
               <BreadcrumbItem v-for="(item,index) in breadcrumb" :key="'breadcrumb' + index" :to="item.to">
@@ -60,34 +65,42 @@
 </script>
 
 <style lang="scss" scoped>
-  .layout{
-    background: #f5f7f9;
+  .layout {
     position: relative;
     overflow: hidden;
   }
   .title {
-    color: #ffffff;
+    color: #f6ca9d;
     font-weight: 600;
     margin-left: 10px;
   }
-  .layout-logo{
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #17233d;
+  }
+  .layout-logo {
     width: 100px;
     height: 30px;
     border-radius: 3px;
-    float: left;
-    position: relative;
-    top: 15px;
-    left: 20px;
     display: flex;
     align-items: center;
   }
-  .layout-nav{
-    width: 800px;
-    margin: 0 auto;
-    margin-right: 20px;
+  .layout-nav {
+    margin-left: 20px;
     user-select: none;
   }
-  .layout-footer-center{
+  .layout-footer-center {
     text-align: center;
+    background-color: #19be6b;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  /deep/ .ivu-layout {
+    background-color: #19be6b;
+  }
+  /deep/ .ivu-menu {
+    background-color: #17233d;
   }
 </style>
