@@ -34,7 +34,6 @@
                   @click="handleSubmit('formValidate')">
             提交
           </Button>
-          <Button @click="handleReset('formValidate')" style="margin-left: 8px">重新填写</Button>
         </FormItem>
       </Form>
     </admin>
@@ -101,9 +100,6 @@
             this.saveConfig()
           }
         })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
       },
       getConfig () {
         this.loading = true

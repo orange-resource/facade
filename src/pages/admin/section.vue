@@ -30,6 +30,7 @@
       :title="isAddData === true ? '新增数据' : '编辑数据'"
       v-model="modal"
       width="720"
+      :mask-closable="false"
       :styles="styles"
     >
 
@@ -37,14 +38,15 @@
             style="margin-bottom: 60px"
             ref="formValidate"
             :model="formValidate"
+            :show-message="false"
             :label-width="150">
-        <FormItem label="版块主图" prop="mainPicture" :required="true">
+        <FormItem label="版块主图" :required="true">
           <upload-img :limit="1" :urlList="formValidate.urlList" @on-success="uploadSuccess"></upload-img>
         </FormItem>
-        <FormItem label="版块名称" prop="name" :required="true">
+        <FormItem label="版块名称" :required="true">
           <Input v-model="formValidate.name" placeholder="请输入版块名称"></Input>
         </FormItem>
-        <FormItem label="版块描述" prop="description" :required="true">
+        <FormItem label="版块描述" :required="true">
           <Input v-model="formValidate.description"
                  type="textarea"
                  show-word-limit
@@ -52,24 +54,24 @@
                  :autosize="{minRows: 2,maxRows: 5}"
                  placeholder="输入点击跳转链接..."></Input>
         </FormItem>
-        <FormItem label="版块显示状态" prop="showStatus">
+        <FormItem label="版块显示状态">
           <i-switch v-model="formValidate.showStatusBool"
                     @on-change="showStatusChange"
                     size="large">
             <span slot="open">显示</span>
-            <span slot="close">不显</span>
+            <span slot="close">关闭</span>
           </i-switch>
         </FormItem>
-        <FormItem label="排序" prop="sort">
+        <FormItem label="排序">
           <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
         </FormItem>
-        <FormItem label="点击跳转链接" prop="openUrl" :required="true">
+        <FormItem label="点击跳转链接" :required="true">
           <Input v-model="formValidate.openUrl"
                  type="textarea"
                  :autosize="{minRows: 2,maxRows: 5}"
                  placeholder="输入点击跳转链接..."></Input>
         </FormItem>
-        <FormItem label="版块访问状态" prop="onStatus">
+        <FormItem label="版块访问状态">
           <i-switch v-model="formValidate.onStatusBool"
                     @on-change="onStatusChange"
                     size="large">
@@ -79,16 +81,16 @@
         </FormItem>
         <FormItem v-if="formValidate.onStatusBool === false"
                   :required="true"
-                  label="不可访问时候的文本"
-                  prop="offText">
+                  label="不可访问时候的文本">
           <Input v-model="formValidate.offText" placeholder="请输入不可访问时候的文本展示"></Input>
         </FormItem>
       </Form>
 
       <div class="drawer-footer">
+        <Button style="margin-right: 8px" @click="modal = false">取消</Button>
         <Button type="primary"
                 :loading="submitLoading"
-                @click="handleSubmit('formValidate')">
+                @click="handleSubmit()">
           提交
         </Button>
       </div>
@@ -206,19 +208,29 @@
       uploadSuccess (url) {
         this.formValidate.mainPicture = url
       },
-      handleSubmit (name) {
+      handleSubmit () {
         if (this.formValidate.urlList.length === 0) {
-          this.formValidate.mainPicture = ''
+          this.$Message.info('请上传主图')
+          return
         }
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            if (this.isAddData) {
-              this.createSection()
-            } else {
-              this.updateSection()
-            }
-          }
-        })
+        if (this.formValidate.name === '') {
+          this.$Message.info('请填写版块名称')
+          return
+        }
+        if (this.formValidate.description === '') {
+          this.$Message.info('请填写版块描述')
+          return
+        }
+        if (this.formValidate.openUrl === '') {
+          this.$Message.info('请填写跳转链接')
+          return
+        }
+
+        if (this.isAddData) {
+          this.createSection()
+        } else {
+          this.updateSection()
+        }
       },
       showStatusChange (bool) {
         if (bool) {

@@ -22,17 +22,18 @@
       :title="isAddData === true ? '新增数据' : '编辑数据'"
       v-model="modal"
       width="720"
+      :mask-closable="false"
       :styles="styles"
     >
 
       <Form ref="formValidate"
             :model="formValidate"
-            :rules="ruleValidate"
+            :show-message="false"
             :label-width="150">
-        <FormItem label="按钮显示文本" prop="text">
+        <FormItem label="按钮显示文本" :required="true">
           <Input v-model="formValidate.text" placeholder="输入按钮显示文本"></Input>
         </FormItem>
-        <FormItem label="按钮icon" prop="icon">
+        <FormItem label="按钮icon" :required="true">
           <Row>
             <Col span="18">
               <Input v-model="formValidate.icon" placeholder="输入按钮icon"></Input>
@@ -42,10 +43,10 @@
             </Col>
           </Row>
         </FormItem>
-        <FormItem label="排序" prop="sort">
+        <FormItem label="排序" :required="true">
           <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
         </FormItem>
-        <FormItem label="按钮点击跳转链接" prop="openUrl">
+        <FormItem label="按钮点击跳转链接" :required="true">
           <Input v-model="formValidate.openUrl"
                  type="textarea"
                  :autosize="{minRows: 2,maxRows: 5}"
@@ -54,12 +55,12 @@
       </Form>
 
       <div class="drawer-footer">
+        <Button style="margin-right: 8px" @click="modal = false">取消</Button>
         <Button type="primary"
                 :loading="submitLoading"
-                @click="handleSubmit('formValidate')">
+                @click="handleSubmit()">
           提交
         </Button>
-        <Button @click="handleReset('formValidate')" style="margin-left: 8px">重新填写</Button>
       </div>
 
     </Drawer>
@@ -127,20 +128,6 @@
         ],
         data: [],
         formValidate: this.getData(),
-        ruleValidate: {
-          text: [
-            { required: true, message: '请输入', trigger: 'blur' }
-          ],
-          icon: [
-            { required: true, message: '请输入', trigger: 'blur' }
-          ],
-          openUrl: [
-            { required: true, message: '请输入', trigger: 'blur' }
-          ],
-          sort: [
-            { required: true, type:'number', message: '请输入', trigger: 'blur' }
-          ]
-        }
       }
     },
     methods: {
@@ -152,19 +139,25 @@
           sort: 1
         }
       },
-      handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            if (this.isAddData) {
-              this.createButton()
-            } else {
-              this.updateButton()
-            }
-          }
-        })
-      },
-      handleReset (name) {
-        this.$refs[name].resetFields();
+      handleSubmit () {
+        if (this.formValidate.text === '') {
+          this.$Message.info('请填写按钮文本')
+          return
+        }
+        if (this.formValidate.icon === '') {
+          this.$Message.info('请填写按钮图标')
+          return
+        }
+        if (this.formValidate.openUrl === '') {
+          this.$Message.info('请填写跳转链接')
+          return
+        }
+
+        if (this.isAddData) {
+          this.createButton()
+        } else {
+          this.updateButton()
+        }
       },
       getButtonGroupList () {
         this.loading = true
