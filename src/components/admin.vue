@@ -93,12 +93,12 @@
   }
   .layout-footer-center {
     text-align: center;
-    background-color: #19be6b;
+    background-color: #67C23A;
     font-weight: 600;
     color: #ffffff;
   }
   /deep/ .ivu-layout {
-    background-color: #19be6b;
+    background-color: #67C23A;
   }
   /deep/ .ivu-menu {
     background-color: #17233d;

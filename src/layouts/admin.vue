@@ -6,7 +6,7 @@
 
 <style lang="scss">
   body {
-    background-color: #19be6b;
+    background-color: #67C23A;
   }
   .admin {
     width: 100%;

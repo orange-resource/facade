@@ -215,18 +215,26 @@
         })
       },
       deleteButton (id) {
-        this.$axios.$post('/buttonGroup/delete', {
-          id: id
-        }).then((res) => {
-          if (res.code === 200) {
-            this.$Message.success(res.message)
-            this.getButtonGroupList()
-          } else {
-            this.$Message.info(res.message)
+        this.$Modal.confirm({
+          title: '删除提示',
+          content: '<p>是否确认删除此条数据?</p>',
+          onOk: () => {
+            this.$axios.$post('/buttonGroup/delete', {
+              id: id
+            }).then((res) => {
+              if (res.code === 200) {
+                this.$Message.success(res.message)
+                this.getButtonGroupList()
+              } else {
+                this.$Message.info(res.message)
+              }
+            }).catch(() => {
+              this.$Message.error('删除按钮发生了未知错误')
+            })
+          },
+          onCancel: () => {
           }
-        }).catch(() => {
-          this.$Message.error('删除按钮发生了未知错误')
-        })
+        });
       }
     }
   }
