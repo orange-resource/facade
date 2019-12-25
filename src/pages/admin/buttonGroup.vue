@@ -217,7 +217,7 @@
       deleteButton (id) {
         this.$Modal.confirm({
           title: '删除提示',
-          content: '<p>是否确认删除此条数据?</p>',
+          content: '<p>确认删除此条数据?</p>',
           onOk: () => {
             this.$axios.$post('/buttonGroup/delete', {
               id: id
