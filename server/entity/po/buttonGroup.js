@@ -19,6 +19,9 @@ const ButtonGroup = sequelize.define('t_button_group', {
   },
   sort: {
     type: Sequelize.INTEGER
+  },
+  showStatus: {
+    type: Sequelize.INTEGER
   }
 }, { timestamps: false, freezeTableName: true })
 

@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 18/12/2019 11:24:48
+ Date: 25/12/2019 19:19:23
 */
 
 SET NAMES utf8mb4;
@@ -43,6 +43,7 @@ CREATE TABLE `t_button_group` (
   `icon` varchar(255) DEFAULT NULL COMMENT '按钮图标 https://www.iviewui.com/components/icon',
   `open_url` text COMMENT '点击按钮跳转链接',
   `sort` int(255) DEFAULT NULL COMMENT '排序',
+  `show_status` int(2) DEFAULT NULL COMMENT '1=显示 2=不显示',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='主页面按钮组设置';
 

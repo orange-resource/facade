@@ -11,6 +11,9 @@
         <template slot-scope="{ row }" slot="icon">
           <Icon :type="row.icon" size="50" />
         </template>
+        <template slot-scope="{ row }" slot="showStatus">
+          {{ row.showStatus === 1 ? '显示' : '不显示' }}
+        </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="primary" size="small" style="margin-right: 5px" @click="updateShowDrawer(row)">编辑</Button>
           <Button type="error" size="small" @click="deleteButton(row.id)">删除</Button>
@@ -45,6 +48,14 @@
         </FormItem>
         <FormItem label="排序" :required="true">
           <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
+        </FormItem>
+        <FormItem label="版块显示状态">
+          <i-switch v-model="formValidate.showStatusBool"
+                    @on-change="showStatusChange"
+                    size="large">
+            <span slot="open">显示</span>
+            <span slot="close">关闭</span>
+          </i-switch>
         </FormItem>
         <FormItem label="按钮点击跳转链接" :required="true">
           <Input v-model="formValidate.openUrl"
@@ -117,6 +128,12 @@
             align: 'center',
           },
           {
+            title: '显示状态',
+            key: 'showStatus',
+            slot: 'showStatus',
+            align: 'center',
+          },
+          {
             title: '打开链接',
             key: 'openUrl',
             align: 'center',
@@ -137,7 +154,16 @@
           text: '',
           icon: '',
           openUrl: '',
-          sort: 1
+          sort: 1,
+          showStatus: 1,
+          showStatusBool: true
+        }
+      },
+      showStatusChange (bool) {
+        if (bool) {
+          this.formValidate.showStatus = 1
+        } else {
+          this.formValidate.showStatus = 2
         }
       },
       handleSubmit () {
@@ -165,6 +191,9 @@
         this.$axios.$post('/buttonGroup/getList').then((res) => {
           this.loading = false
           if (res.code === 200) {
+            for (let i = 0, arr = res.data; i < arr.length; i++) {
+              arr[i].showStatusBool = arr[i].showStatus === 1
+            }
             this.data = res.data
           } else {
             this.$Message.info(res.message)

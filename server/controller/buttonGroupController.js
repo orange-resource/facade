@@ -5,8 +5,11 @@ const ButtonGroup = require('../entity/po/buttonGroup')
 const Rsp = require('../common/Rsp')
 const router = express.Router()
 
-router.post('/buttonGroup/getButtonList', permission, asyncHandler(async (req, res, nuxt) => {
+router.post('/buttonGroup/getButtonList', asyncHandler(async (req, res, nuxt) => {
   ButtonGroup.findAll({
+    where: {
+      showStatus: 1
+    },
     order: [
       ['sort', 'ASC']
     ]
@@ -33,7 +36,8 @@ router.post('/buttonGroup/create', permission, asyncHandler(async (req, res, nux
     text: req.body.text,
     icon: req.body.icon,
     openUrl: req.body.openUrl,
-    sort: req.body.sort
+    sort: req.body.sort,
+    showStatus: req.body.showStatus
   }).then(b => {
     res.json(Rsp.build(Rsp.SUCCEED))
   }).catch(() => {
@@ -46,7 +50,8 @@ router.post('/buttonGroup/update', permission, asyncHandler(async (req, res, nux
     text: req.body.text,
     icon: req.body.icon,
     openUrl: req.body.openUrl,
-    sort: req.body.sort
+    sort: req.body.sort,
+    showStatus: req.body.showStatus
   }, {
     where: {
       id: req.body.id
