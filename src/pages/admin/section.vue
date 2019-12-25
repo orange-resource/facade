@@ -108,6 +108,7 @@
   export default {
     name: "sectionPage",
     components: { SectionTableExpand },
+    layout: 'admin',
     middleware: 'userAuth',
     mounted () {
       this.getSectionList()

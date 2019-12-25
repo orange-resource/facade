@@ -25,7 +25,6 @@
         <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
 
           <a-link v-for="(item,index) in sectionList"
-                  v-if="item.showStatus === 1"
                   :key="'card' + index"
                   :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
                   :target="item.onStatus === 1 ? '_blank' : '_self'">
@@ -61,7 +60,7 @@
 
       const api = process.env.devApi
 
-      await content.app.$axios.post(api + '/system/config/get').then((res) => {
+      await content.app.$axios.post(api + '/system/config/getConfig').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {
@@ -84,7 +83,7 @@
         }
       })
 
-      await content.app.$axios.post(api + '/buttonGroup/getList').then((res) => {
+      await content.app.$axios.post(api + '/buttonGroup/getButtonList').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {
@@ -93,7 +92,7 @@
         }
       })
 
-      await content.app.$axios.post(api + '/section/getList').then((res) => {
+      await content.app.$axios.post(api + '/section/getSectionList').then((res) => {
         if (res.status === 200) {
           const da = res.data
           if (da.code === 200) {

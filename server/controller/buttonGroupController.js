@@ -5,7 +5,20 @@ const ButtonGroup = require('../entity/po/buttonGroup')
 const Rsp = require('../common/Rsp')
 const router = express.Router()
 
-router.post('/buttonGroup/getList', asyncHandler(async (req, res, nuxt) => {
+router.post('/buttonGroup/getButtonList', permission, asyncHandler(async (req, res, nuxt) => {
+  ButtonGroup.findAll({
+    order: [
+      ['sort', 'ASC']
+    ]
+  }).then(list => {
+    list.forEach(button => {
+      delete button.dataValues.id
+    })
+    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, list))
+  })
+}))
+
+router.post('/buttonGroup/getList', permission, asyncHandler(async (req, res, nuxt) => {
   ButtonGroup.findAll({
     order: [
       ['sort', 'ASC']

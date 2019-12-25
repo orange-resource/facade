@@ -1,14 +1,12 @@
 <template>
-  <div class="admin">
+  <div class="admin-layout">
     <nuxt/>
   </div>
 </template>
 
 <style lang="scss">
-  body {
+  .admin-layout {
     background-color: #67C23A;
-  }
-  .admin {
     width: 100%;
     height: 100%;
   }

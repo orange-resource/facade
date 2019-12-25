@@ -8,7 +8,18 @@ const AsyncLock = require('async-lock')
 const lock = new AsyncLock()
 const router = express.Router()
 
-router.post('/system/config/get', asyncHandler(async (req, res, nuxt) => {
+router.post('/system/config/getConfig', asyncHandler(async (req, res, nuxt) => {
+  SystemConfig.findAll().then(configList => {
+    let config = null
+    if (configList.length > 0) {
+      config = configList[0].dataValues
+      delete config.id
+    }
+    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, config))
+  })
+}))
+
+router.post('/system/config/get', permission, asyncHandler(async (req, res, nuxt) => {
   SystemConfig.findAll().then(configList => {
     res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, configList.length > 0 ? configList[0] : null))
   })

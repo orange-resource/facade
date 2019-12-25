@@ -73,6 +73,7 @@
   export default {
     name: "buttonGroup",
     middleware: 'userAuth',
+    layout: 'admin',
     mounted () {
       this.getButtonGroupList()
     },

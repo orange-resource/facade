@@ -5,7 +5,23 @@ const Section = require('../entity/po/section')
 const Rsp = require('../common/Rsp')
 const router = express.Router()
 
-router.post('/section/getList', asyncHandler(async (req, res, nuxt) => {
+router.post('/section/getSectionList', asyncHandler(async (req, res, nuxt) => {
+  Section.findAll({
+    where: {
+      showStatus: 1
+    },
+    order: [
+      ['sort', 'ASC']
+    ]
+  }).then(list => {
+    list.forEach(section => {
+      delete section.dataValues.id
+    })
+    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, list))
+  })
+}))
+
+router.post('/section/getList', permission, asyncHandler(async (req, res, nuxt) => {
   Section.findAll({
     order: [
       ['sort', 'ASC']
