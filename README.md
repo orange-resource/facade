@@ -19,6 +19,8 @@
 ## 详细文档手册
 <https://gitee.com/orange-resource/facade/wikis/>
 
+#### 如果你有更好的意见或者想法，可以提出Issues
+
 ## 首页
 ![描述](https://gitee.com/orange-resource/facade/raw/master/release/home1.png)
 
