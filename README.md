@@ -1,22 +1,25 @@
 # facade
 
-> facade page
+> 采用nuxt + express构建的产品介绍网站，让你快速拥有一个可以快速展示自身产品或者项目的响应式网站
 
-## Build Setup
+## 项目环境介绍
+> nuxt2.10.2 + express4.17.1 
+> 
+> src 文件夹 => 前端代码
+>
+> server 文件夹 => 后台代码
+>
+> release 文件夹 => 需要用到sql文件，线上nginx.conf配置示例
 
-``` bash
-# install dependencies
-$ yarn install
+## 详细文档手册
+http://.....
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## 首页
+![描述](https://gitee.com/orange-resource/facade/raw/master/release/home1.png)
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+![描述](https://gitee.com/orange-resource/facade/raw/master/release/home2.png)
 
-# generate static project
-$ yarn generate
-```
+## 后台管理
+![描述](https://gitee.com/orange-resource/facade/raw/master/release/back_login.png)
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+![描述](https://gitee.com/orange-resource/facade/raw/master/release/back1.png)
