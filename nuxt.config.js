@@ -17,7 +17,7 @@ module.exports = {
     ]
   },
   server: {
-    port: env === 'development' ? 9010 : 80,
+    port: 9010,
     host: '0.0.0.0'
   },
   srcDir: 'src/',
