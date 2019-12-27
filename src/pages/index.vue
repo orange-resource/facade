@@ -22,14 +22,28 @@
     <div v-if="sectionList.length > 0" class="bottom-box">
       <Row type="flex" justify="center">
 
-        <Col class="card-box" :xs="22" :sm="22" :md="22" :lg="20">
+        <Col class="" :xs="22" :sm="22" :md="22" :lg="20">
 
-          <a-link v-for="(item,index) in sectionList"
-                  :key="'card' + index"
-                  :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
-                  :target="item.onStatus === 1 ? '_blank' : '_self'">
-            <section-box :data="item"></section-box>
-          </a-link>
+          <span>333</span>
+          <div class="card-box card-box-center">
+            <a-link
+                    v-for="(item,index) in sectionList"
+                    :key="'card' + index"
+                    :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
+                    :target="item.onStatus === 1 ? '_blank' : '_self'">
+              <section-box :data="item"></section-box>
+            </a-link>
+          </div>
+          <span>333</span>
+          <div class="card-box card-box-center">
+            <a-link
+                    v-for="(item,index) in sectionList"
+                    :key="'card' + index"
+                    :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
+                    :target="item.onStatus === 1 ? '_blank' : '_self'">
+              <section-box :data="item"></section-box>
+            </a-link>
+          </div>
 
         </Col>
 
@@ -168,8 +182,18 @@
     .card-box {
       display: flex;
       flex-wrap: wrap;
+      text-align: center;
       justify-content: center;
     }
+    /*@media all and (min-width: 1500px) {*/
+    /*  .card-box-center {*/
+    /*  }*/
+    /*}*/
+    /*@media all and (max-width: 1500px) {*/
+    /*  .card-box-center {*/
+    /*    justify-content: center;*/
+    /*  }*/
+    /*}*/
     .card {
       cursor: pointer;
       margin-left: 10px;

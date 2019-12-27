@@ -1,5 +1,5 @@
 <template>
-  <Card class="card">
+  <div class="card">
     <div class="box">
       <img v-lazy="data.mainPicture">
       <h3>{{ data.name }}</h3>
@@ -8,7 +8,7 @@
     <div v-if="data.onStatus === 2" class="off-box">
       {{ data.offText }}
     </div>
-  </Card>
+  </div>
 </template>
 
 <script>
@@ -28,14 +28,23 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #EBEEF5;
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     width: 320px;
     position: relative;
+    transition: transform 0.2s;
+    &:hover {
+      transform: translate(0, -10px);
+    }
     .box {
       display: flex;
       flex-direction: column;
       justify-content: center;
       img {
-        height: 260px;
+        height: 120px;
         border-radius: 5px;
       }
       h3 {

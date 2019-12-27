@@ -9,8 +9,8 @@
       </ButtonGroup>
       <Table :loading="loading" border :columns="columns" :data="data" :stripe="true" style="margin-top: 10px">
         <template slot-scope="{ row }" slot="mainPicture">
-          <div style="margin: 10px">
-            <img class="openImage" v-lazy="row.mainPicture" height="100px" width="100%">
+          <div style="margin-top: 8px">
+            <img class="openImage" v-lazy="row.mainPicture" height="120px" width="320px">
           </div>
         </template>
         <template slot-scope="{ row }" slot="showStatus">
@@ -151,7 +151,7 @@
             key: 'mainPicture',
             slot: 'mainPicture',
             align: 'center',
-            width: '200'
+            width: '350'
           },
           {
             title: '版块名称',
