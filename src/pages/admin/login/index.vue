@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="box">
-      <div class="login-box animated bounce">
+      <div class="login-box animated bounceInLeft">
         <div class="title-box">
-          <h2>橘子后台管理系统</h2>
+          <h2 class="title">后台管理系统</h2>
         </div>
         <div class="content-box">
           <Input v-model="username" class="input" clearable placeholder="请输入管理员账号">
@@ -17,7 +17,7 @@
                  placeholder="请输入管理员密码">
             <Icon type="md-ionitron" slot="prefix" />
           </Input>
-          <Button class="login-button" type="success" :loading="loading" @click="login()">登录</Button>
+          <Button class="login-button" :loading="loading" @click="login()">登录</Button>
         </div>
       </div>
     </div>
@@ -71,8 +71,11 @@
   .container {
     width: 100%;
     height: 100%;
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+  }
+  .title {
+    color: #ffffff;
+    font-weight: 600;
   }
   .box {
     width: 100%;
@@ -84,8 +87,7 @@
   .login-box {
     width: 500px;
     height: 300px;
-    background-color: #FFDEE9;
-    background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+    background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
     border-radius: 10px;
     // 1.水平阴影  2.垂直阴影 3.模糊距离，改虚实 4.阴影尺寸
     box-shadow: 5px 10px 15px 2px rgba(0,0,0,0.1);

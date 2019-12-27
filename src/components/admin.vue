@@ -28,11 +28,9 @@
         </Menu>
       </Header>
       <Content :style="{padding: '0 50px'}">
-        <Card class="animated bounceInLeft"
-              :bordered="false"
+        <Card class="card animated bounceInLeft"
               :padding="20"
               :shadow="true"
-              :dis-hover="true"
               :style="{margin: '20px 0'}">
           <div style="min-height: 200px;">
             <Breadcrumb style="margin-bottom: 20px">
@@ -93,12 +91,12 @@
   }
   .layout-footer-center {
     text-align: center;
-    background-color: #67C23A;
+    background-color: #f8f8f9;
     font-weight: 600;
-    color: #ffffff;
+    color: #808695;
   }
   /deep/ .ivu-layout {
-    background-color: #67C23A;
+    background-color: #f8f8f9;
   }
   /deep/ .ivu-menu {
     background-color: #17233d;

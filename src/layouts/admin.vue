@@ -6,7 +6,7 @@
 
 <style lang="scss">
   .admin-layout {
-    background-color: #67C23A;
+    background-color: #f8f8f9;
     width: 100%;
     height: 100%;
   }
