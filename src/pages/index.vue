@@ -41,7 +41,7 @@
       </div>
     </div>
     <!--  下方卡片  -->
-    <div id="bottom" v-if="sectionList.length > 0" class="bottom-box">
+    <div v-if="sectionList.length > 0" class="bottom-box">
       <Row type="flex" justify="center">
 
         <Col class="" :xs="22" :sm="22" :md="22" :lg="20">
@@ -144,9 +144,11 @@
     },
     methods: {
       handleScroll () {
-        const scrollTop = window.pageYOffset ||document.documentElement.scrollTop || document.body.scrollTop
-        const offsetTop = document.getElementById("bottom").offsetTop
-        this.showSmallTop = scrollTop > offsetTop - 90
+        this.$nextTick(() => {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          const offsetTop = document.getElementsByClassName("bottom-box").offsetTop
+          this.showSmallTop = scrollTop > offsetTop - 90
+        })
       },
       position (id) {
         console.log(id)
