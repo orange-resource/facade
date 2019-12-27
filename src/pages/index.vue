@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div v-if="systemConfig !== null" class="top-box">
+    <!--  头部  -->
+    <div :class="{ 'visibility': showSmallTop }" class="top-box">
       <h1 class="title">{{ systemConfig.pageMainTitle }}</h1>
       <div class="description">
         <p>{{ systemConfig.pageMainDescription }}</p>
@@ -13,28 +14,41 @@
           <simple-button :icon="item.icon" :text="item.text"></simple-button>
         </a-link>
       </div>
+      <div class="category">
+        <Icon type="md-list-box" size="30"
+              @click="openCategory = true" />
+      </div>
+      <Drawer placement="left"
+              :closable="false"
+              width="250"
+              v-model="openCategory">
+        <div class="category-count">
+          <span>总共有9个分类</span>
+        </div>
+        <div style="margin-top: 10px">
+          <Button type="primary"
+                  @click="position('324242424234234')"
+                  :long="true">推荐</Button>
+        </div>
+      </Drawer>
     </div>
-    <div v-if="systemConfig === null" class="top-box">
-      <none>
-        <span class="none-span">空空如也...</span>
-      </none>
+    <div v-if="showSmallTop === true" class="top-small-box">
+      <h1 class="title">{{ systemConfig.pageMainTitle }}</h1>
+      <div class="category">
+        <Icon type="md-list-box"
+              @click="openCategory = true"
+              size="30" />
+      </div>
     </div>
-    <div v-if="sectionList.length > 0" class="bottom-box">
+    <!--  下方卡片  -->
+    <div id="bottom" v-if="sectionList.length > 0" class="bottom-box">
       <Row type="flex" justify="center">
 
         <Col class="" :xs="22" :sm="22" :md="22" :lg="20">
 
-          <span>333</span>
-          <div class="card-box card-box-center">
-            <a-link
-                    v-for="(item,index) in sectionList"
-                    :key="'card' + index"
-                    :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
-                    :target="item.onStatus === 1 ? '_blank' : '_self'">
-              <section-box :data="item"></section-box>
-            </a-link>
+          <div :id="324242424234234" class="category">
+            <span class="category-title">推荐</span>
           </div>
-          <span>333</span>
           <div class="card-box card-box-center">
             <a-link
                     v-for="(item,index) in sectionList"
@@ -54,6 +68,7 @@
         <span class="none-span" style="color: #909399">空空如也...</span>
       </none>
     </div>
+    <!--  底部  -->
     <div class="footer">
       <span v-if="systemConfig !== null">
         {{ systemConfig.footerInfo }}
@@ -67,7 +82,7 @@
     async asyncData(content) {
 
       const data = {
-        systemConfig: null,
+        systemConfig: {},
         buttonGroup: [],
         sectionList: []
       }
@@ -116,6 +131,35 @@
       })
 
       return data
+    },
+    mounted () {
+      this.handleScroll()
+      window.addEventListener('scroll', this.handleScroll)
+    },
+    data () {
+      return {
+        showSmallTop: false,
+        openCategory: false
+      }
+    },
+    methods: {
+      handleScroll () {
+        const scrollTop = window.pageYOffset ||document.documentElement.scrollTop || document.body.scrollTop
+        const offsetTop = document.getElementById("bottom").offsetTop
+        this.showSmallTop = scrollTop > offsetTop - 90
+      },
+      position (id) {
+        console.log(id)
+        const scrollTop = document.getElementById(id)
+        console.log(scrollTop)
+        window.pageYOffset = scrollTop
+        document.documentElement.scrollTop = scrollTop
+        document.body.scrollTop = scrollTop
+        this.openCategory = false
+      }
+    },
+    destroyed () {
+      window.removeEventListener('scroll', this.handleScroll)
     }
   }
 </script>
@@ -124,15 +168,59 @@
   .container {
     width: 100%;
   }
+  .visibility {
+    visibility: hidden;
+  }
+  .category-count {
+    width: 100%;
+    color: #c5c8ce;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .top-small-box {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #2d8cf0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    .category {
+      color: #ffffff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .title {
+      color: #ffffff;
+      font-size: 30px;
+      margin-left: 15px;
+    }
+  }
   .top-box {
     width: 100%;
     height: 300px;
     background-color: #2d8cf0;
-    border-bottom: 2px solid #e8eaec;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    .category {
+      color: #ffffff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-weight: 900;
+      cursor: pointer;
+    }
     .title {
       color: #ffffff;
       font-size: 50px;
@@ -178,22 +266,22 @@
     }
   }
   .bottom-box {
-    margin-top: 30px;
+    .category {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      .category-title {
+        font-weight: 600;
+        color: #17233d;
+        font-size: 20px;
+      }
+    }
     .card-box {
       display: flex;
       flex-wrap: wrap;
       text-align: center;
       justify-content: center;
     }
-    /*@media all and (min-width: 1500px) {*/
-    /*  .card-box-center {*/
-    /*  }*/
-    /*}*/
-    /*@media all and (max-width: 1500px) {*/
-    /*  .card-box-center {*/
-    /*    justify-content: center;*/
-    /*  }*/
-    /*}*/
     .card {
       cursor: pointer;
       margin-left: 10px;

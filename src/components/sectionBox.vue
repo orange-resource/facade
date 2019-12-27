@@ -3,10 +3,13 @@
     <div class="box">
       <img v-lazy="data.mainPicture">
       <h3>{{ data.name }}</h3>
-      <p>{{ data.description }}</p>
+      <p class="text-line-feed3">{{ data.description }}</p>
     </div>
     <div v-if="data.onStatus === 2" class="off-box">
       {{ data.offText }}
+    </div>
+    <div v-if="data.openUrlStatus === 1" class="open">
+      <span>点击查看详情</span>
     </div>
   </div>
 </template>
@@ -36,6 +39,7 @@
     width: 320px;
     position: relative;
     transition: transform 0.2s;
+    height: 265px;
     &:hover {
       transform: translate(0, -10px);
     }
@@ -71,6 +75,20 @@
       align-items: center;
       font-weight: 900;
       color: #515a6e;
+    }
+
+    .open {
+      width: 100%;
+      position: absolute;
+      bottom: 5px;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 20px;
+      span {
+        font-weight: 900;
+        color: #c5c8ce;
+        font-size: 10px;
+      }
     }
   }
 </style>
