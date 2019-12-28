@@ -11,11 +11,17 @@
         <FormItem label="endpoint" prop="endpoint">
           <Input v-model="formValidate.endpoint" placeholder="请输入endpoint"></Input>
         </FormItem>
-        <FormItem label="keyId" prop="keyId">
-          <Input v-model="formValidate.keyId" placeholder="请输入keyId"></Input>
+        <FormItem label="accessKeyId" prop="keyId">
+          <Input v-model="formValidate.keyId"
+                 type="password"
+                 :password="true"
+                 placeholder="请输入keyId"></Input>
         </FormItem>
-        <FormItem label="keySecret" prop="keySecret">
-          <Input v-model="formValidate.keySecret" placeholder="请输入keySecret"></Input>
+        <FormItem label="accessKeySecret" prop="keySecret">
+          <Input v-model="formValidate.keySecret"
+                 type="password"
+                 :password="true"
+                 placeholder="请输入keySecret"></Input>
         </FormItem>
         <FormItem label="bucketName" prop="bucketName">
           <Input v-model="formValidate.bucketName" placeholder="请输入bucketName"></Input>

@@ -18,6 +18,12 @@
         <span class="expand-value">{{ row.openUrl }}</span>
       </Col>
     </Row>
+    <Row class="expand-row">
+      <Col span="24">
+        <span class="expand-key">关闭访问显示文本: </span>
+        <span class="expand-value">{{ row.offText }}</span>
+      </Col>
+    </Row>
   </div>
 </template>
 

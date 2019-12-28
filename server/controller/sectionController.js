@@ -21,18 +21,25 @@ router.post('/section/getSectionList', asyncHandler(async (req, res, nuxt) => {
   })
 }))
 
-router.post('/section/getList', permission, asyncHandler(async (req, res, nuxt) => {
-  Section.findAll({
+router.post('/section/getListByPage', permission, asyncHandler(async (req, res, nuxt) => {
+  Section.findAndCountAll({
+    limit: req.body.limit,
+    offset: (req.body.offset - 1) * req.body.limit,
     order: [
-      ['sort', 'ASC']
+      ['createAt', 'DESC']
     ]
   }).then(list => {
-    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, list))
+    const table = {
+      list: list.rows,
+      count: list.count
+    }
+    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, table))
   })
 }))
 
 router.post('/section/create', permission, asyncHandler(async (req, res, nuxt) => {
   Section.create({
+    createAt: new Date(),
     name: req.body.name,
     description: req.body.description,
     showStatus: req.body.showStatus,
@@ -40,7 +47,8 @@ router.post('/section/create', permission, asyncHandler(async (req, res, nuxt) =
     sort: req.body.sort,
     onStatus: req.body.onStatus,
     offText: req.body.offText,
-    mainPicture: req.body.mainPicture
+    mainPicture: req.body.mainPicture,
+    categoryId: req.body.categoryId
   }).then(s => {
     res.json(Rsp.build(Rsp.SUCCEED))
   }).catch(() => {
@@ -57,7 +65,8 @@ router.post('/section/update', permission, asyncHandler(async (req, res, nuxt) =
     sort: req.body.sort,
     onStatus: req.body.onStatus,
     offText: req.body.offText,
-    mainPicture: req.body.mainPicture
+    mainPicture: req.body.mainPicture,
+    categoryId: req.body.categoryId
   }, {
     where: {
       id: req.body.id

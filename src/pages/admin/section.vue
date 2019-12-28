@@ -7,23 +7,36 @@
           新增版块
         </Button>
       </ButtonGroup>
-      <Table :loading="loading" border :columns="columns" :data="data" :stripe="true" style="margin-top: 10px">
+      <Table :loading="loading"
+             border
+             :columns="columns"
+             :data="data" :stripe="true" style="margin-top: 10px">
         <template slot-scope="{ row }" slot="mainPicture">
           <div style="margin-top: 8px">
             <img class="openImage" v-lazy="row.mainPicture" height="120px" width="320px">
           </div>
         </template>
         <template slot-scope="{ row }" slot="showStatus">
-          {{ row.showStatus === 1 ? '显示' : '不显示' }}
+          <Tag v-if="row.showStatus === 1" checkable color="success">显示</Tag>
+          <Tag v-else checkable color="error">不显示</Tag>
         </template>
         <template slot-scope="{ row }" slot="onStatus">
-          {{ row.onStatus === 1 ? '开启访问' : '关闭访问' }}
+          <Tag v-if="row.onStatus === 1" checkable color="success">开启访问</Tag>
+          <Tag v-else checkable color="error">关闭访问</Tag>
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="primary" size="small" style="margin-right: 5px" @click="updateShowDrawer(row)">编辑</Button>
           <Button type="error" size="small" @click="deleteSection(row.id)">删除</Button>
         </template>
       </Table>
+      <div style="margin: 10px;overflow: hidden">
+        <div style="float: right;">
+          <Page :total="total"
+                show-total
+                :pageSize="pageSize"
+                :current="current" @on-change="changePage"></Page>
+        </div>
+      </div>
     </admin>
 
     <Drawer
@@ -40,6 +53,16 @@
             :model="formValidate"
             :show-message="false"
             :label-width="150">
+        <FormItem label="分类选择" :required="true">
+          <Select v-model="formValidate.categoryId"
+                  ref="category"
+                  style="width:200px">
+            <Option v-for="item in categoryList"
+                    :value="item.value"
+                    :key="item.value">{{ item.label }}</Option>
+          </Select>
+          <Button @click="refreshCategory()">刷新</Button>
+        </FormItem>
         <FormItem label="版块主图" :required="true">
           <upload-img :limit="1" :urlList="formValidate.urlList" @on-success="uploadSuccess"></upload-img>
         </FormItem>
@@ -65,7 +88,7 @@
         <FormItem label="排序">
           <InputNumber :max="1000" :min="1" v-model="formValidate.sort"></InputNumber>
         </FormItem>
-        <FormItem label="点击跳转链接" :required="true">
+        <FormItem label="点击跳转链接">
           <Input v-model="formValidate.openUrl"
                  type="textarea"
                  :autosize="{minRows: 2,maxRows: 5}"
@@ -111,6 +134,7 @@
     layout: 'admin',
     middleware: 'userAuth',
     mounted () {
+      this.getCategoryList()
       this.getSectionList()
     },
     data () {
@@ -128,6 +152,7 @@
         loading: false,
         submitLoading: false,
         isAddData: true,
+        categoryList: [],
         columns: [
           {
             type: 'expand',
@@ -139,12 +164,6 @@
                 }
               })
             }
-          },
-          {
-            title: '序号',
-            type: 'index',
-            width: 100,
-            align: 'center'
           },
           {
             title: '主图',
@@ -176,17 +195,15 @@
             align: 'center',
           },
           {
-            title: '关闭访问显示文本',
-            key: 'offText',
-            align: 'center',
-          },
-          {
             title: '操作',
             slot: 'action',
             align: 'center'
           }
         ],
         data: [],
+        total: 0,
+        pageSize: 5,
+        current: 1,
         formValidate: this.getData(),
       }
     },
@@ -203,13 +220,19 @@
           openUrl: '',
           onStatus: 1,
           onStatusBool: true,
-          offText: ''
+          offText: '',
+          categoryId: ''
         }
       },
       uploadSuccess (url) {
         this.formValidate.mainPicture = url
       },
       handleSubmit () {
+        if (this.formValidate.categoryId === undefined
+          || this.formValidate.categoryId === '') {
+          this.$Message.info('请选择分类')
+          return
+        }
         if (this.formValidate.urlList.length === 0) {
           this.$Message.info('请上传主图')
           return
@@ -220,10 +243,6 @@
         }
         if (this.formValidate.description === '') {
           this.$Message.info('请填写版块描述')
-          return
-        }
-        if (this.formValidate.openUrl === '') {
-          this.$Message.info('请填写跳转链接')
           return
         }
 
@@ -247,6 +266,28 @@
           this.formValidate.onStatus = 2
         }
       },
+      refreshCategory () {
+        this.formValidate.categoryId = ''
+        this.getCategoryList()
+      },
+      getCategoryList () {
+        this.$axios.$post('/category/getList').then((res) => {
+          if (res.code === 200) {
+            this.categoryList = []
+            for (let i = 0, arr = res.data; i < arr.length; i++) {
+              this.categoryList.push({
+                value: arr[i].id,
+                label: arr[i].name
+              })
+            }
+          } else {
+            this.$Message.info(res.message)
+          }
+        }).catch(() => {
+          this.loading = false
+          this.$Message.error('获取按钮组数据发生了未知错误')
+        })
+      },
       openImage () {
         this.$nextTick(function () {
           let openImageClass = document.getElementsByClassName('openImage')
@@ -262,18 +303,27 @@
           }
         })
       },
+      changePage (index) {
+        this.current = index
+        this.getSectionList()
+      },
       getSectionList () {
         this.loading = true
-        this.$axios.$post('/section/getList').then((res) => {
+        const req = {
+          limit: this.pageSize,
+          offset: this.current
+        }
+        this.$axios.$post('/section/getListByPage', req).then((res) => {
           this.loading = false
           if (res.code === 200) {
-            for (let i = 0, arr = res.data; i < arr.length; i++) {
+            for (let i = 0, arr = res.data.list; i < arr.length; i++) {
               arr[i].showStatusBool = arr[i].showStatus === 1
               arr[i].onStatusBool = arr[i].onStatus === 1
               arr[i].urlList = []
               arr[i].urlList.push(arr[i].mainPicture)
             }
-            this.data = res.data
+            this.data = res.data.list
+            this.total = res.data.count
             this.openImage()
           } else {
             this.$Message.info(res.message)
@@ -304,6 +354,7 @@
         })
       },
       updateShowDrawer (row) {
+        console.log(row)
         this.isAddData = false
         this.$refs['formValidate'].resetFields()
         this.formValidate = clone.deep(row)

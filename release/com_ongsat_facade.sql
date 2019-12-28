@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 25/12/2019 19:19:23
+ Date: 28/12/2019 15:06:02
 */
 
 SET NAMES utf8mb4;
@@ -48,11 +48,24 @@ CREATE TABLE `t_button_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='主页面按钮组设置';
 
 -- ----------------------------
+-- Table structure for t_category
+-- ----------------------------
+DROP TABLE IF EXISTS `t_category`;
+CREATE TABLE `t_category` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '分类名称',
+  `show_status` int(2) DEFAULT NULL COMMENT '1=显示 2=不显示',
+  `sort` int(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for t_section
 -- ----------------------------
 DROP TABLE IF EXISTS `t_section`;
 CREATE TABLE `t_section` (
   `id` varchar(250) NOT NULL,
+  `create_at` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '版块名称',
   `description` varchar(500) DEFAULT NULL COMMENT '版块描述',
   `show_status` int(2) DEFAULT NULL COMMENT '版块显示状态 1=显示 2=不显示',
@@ -61,6 +74,7 @@ CREATE TABLE `t_section` (
   `on_status` int(2) DEFAULT NULL COMMENT '开启访问状态 1=开启访问 2=不开启访问，显示不开启访问的文本',
   `off_text` varchar(255) DEFAULT NULL COMMENT '不开启访问时显示的文本内容，比如可以填写，敬请期待',
   `main_picture` text COMMENT '主图',
+  `category_id` varchar(255) DEFAULT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='版块';
 

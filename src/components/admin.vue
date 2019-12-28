@@ -8,6 +8,10 @@
         </div>
         <Menu mode="horizontal" theme="dark" :active-name="name">
           <div class="layout-nav">
+            <MenuItem name="category" to="/admin/category">
+              <Icon type="ios-list-box" />
+              分类设置
+            </MenuItem>
             <MenuItem name="sectionPage" to="/admin/section">
               <Icon type="md-list-box" />
               版块设置

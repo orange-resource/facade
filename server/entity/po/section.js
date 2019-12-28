@@ -8,6 +8,9 @@ const Section = sequelize.define('t_section', {
     type: Sequelize.STRING,
     primaryKey: true
   },
+  createAt: {
+    type: Sequelize.DATE(6)
+  },
   name: {
     type: Sequelize.STRING
   },
@@ -31,6 +34,9 @@ const Section = sequelize.define('t_section', {
   },
   mainPicture: {
     type: Sequelize.TEXT
+  },
+  categoryId: {
+    type: Sequelize.STRING
   }
 }, { timestamps: false, freezeTableName: true })
 

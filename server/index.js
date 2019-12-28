@@ -49,6 +49,7 @@ async function start () {
   })
 
   app.use((err, req, res, next) => {
+    consola.error(err)
     res.json(Rsp.build(Rsp.SERIOUS_ERROR))
   })
 
