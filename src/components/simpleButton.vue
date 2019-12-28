@@ -26,8 +26,8 @@
     margin: 0;
     outline: none;
 
-    width: 120px;
-    height: 40px;
+    width: 146px;
+    height: 46px;
 
     background-color: #ffffff;
     border: none;
@@ -41,9 +41,10 @@
     align-items: center;
     justify-content: center;
     .text {
-      margin-left: 5px;
-      font-size: 15px;
+      margin-left: 8px;
+      font-size: 16px;
       font-weight: 500;
+      color: #409EFF;
     }
   }
 </style>

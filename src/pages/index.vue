@@ -20,13 +20,14 @@
       </div>
       <Drawer placement="left"
               :closable="false"
-              width="250"
+              width="280"
               v-model="openCategory">
         <div class="category-count">
           <span>总共有{{ categoryList.length }}个分类</span>
         </div>
         <div v-for="(item, index) in categoryList" :key="'ca' + index" style="margin-top: 10px">
           <Button type="primary"
+                  style="height:44px; margin-bottom: 10px"
                   @click="position(item.id)"
                   :long="true">{{ item.name }}</Button>
         </div>
@@ -44,7 +45,7 @@
     <div v-if="sectionList.length > 0" ref="bottomBox" class="bottom-box">
       <Row type="flex" justify="center">
 
-        <Col class="" :xs="22" :sm="22" :md="22" :lg="20">
+        <Col :xs="22" :sm="22" :md="22" :lg="20">
 
           <div v-for="(item, index) in categoryList" :key="'se' + index">
 
@@ -67,7 +68,7 @@
 
       </Row>
     </div>
-    <div v-if="sectionList.length === 0" ref="bottomBox" class="bottom-box">
+    <div v-if="sectionList.length === 0" ref="bottomBox" class="bottom-box-none">
       <none>
         <span class="none-span" style="color: #909399">空空如也...</span>
       </none>
@@ -192,24 +193,28 @@
   .visibility {
     visibility: hidden;
   }
+  /deep/ .ivu-drawer-body {
+    padding: 16px 22px;
+  }
   .category-count {
     width: 100%;
-    color: #c5c8ce;
+    color: #222222;
     display: flex;
     justify-content: center;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
+    margin: 10px 0 20px;
   }
   .top-small-box {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 65px;
-    background-color: #2d8cf0;
+    height: 72px;
+    background-color: #409EFF;
     z-index: 999;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    justify-content: center;
     .category {
       color: #ffffff;
       position: absolute;
@@ -220,20 +225,19 @@
     }
     .title {
       color: #ffffff;
-      font-size: 30px;
-      margin-left: 15px;
+      font-size: 20px;
+      font-weight: 500;
     }
   }
   .top-box {
     width: 100%;
-    height: 300px;
-    background-color: #2d8cf0;
+    height: 380px;
+    background-color: #409EFF;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     .category {
       color: #ffffff;
       position: absolute;
@@ -244,7 +248,9 @@
     }
     .title {
       color: #ffffff;
-      font-size: 50px;
+      font-size: 46px;
+      font-weight: 500;
+      margin-bottom: 15px;
     }
     .description {
       width: 80%;
@@ -252,8 +258,8 @@
       justify-content: center;
       p {
         color: #ffffff;
-        font-size: 15px;
-        font-weight: 600;
+        font-size: 18px;
+        font-weight: 500;
       }
     }
     .button-group {
@@ -261,14 +267,14 @@
     }
     @media all and (min-width: 992px) {
       .button-group-media {
-        margin-top: 20px;
+        margin-top: 30px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         .button {
-          margin-left: 5px;
-          margin-right: 5px;
+          margin-left: 20px;
+          margin-right: 20px;
         }
       }
     }
@@ -280,20 +286,26 @@
         align-items: center;
         justify-content: center;
         .button {
-          margin-top: 5px;
-          margin-bottom: 5px;
+          margin-top: 10px;
+          margin-bottom: 10px;
         }
       }
     }
   }
+  .bottom-box-none {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .bottom-box {
     .category {
       text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: 80px;
+      margin-bottom: 40px;
       .category-title {
-        font-weight: 600;
-        color: #17233d;
+        font-weight: 900;
+        color: #303133;
         font-size: 20px;
       }
     }
@@ -303,23 +315,17 @@
       text-align: center;
       justify-content: center;
     }
-    .card {
-      cursor: pointer;
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-bottom: 20px;
-      width: 320px;
-    }
   }
 
   .footer {
     margin-top: 50px;
-    height: 100px;
-    background-color: #17233d;
+    height: 150px;
+    background-color: #222222;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ffffff;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
   }
 </style>

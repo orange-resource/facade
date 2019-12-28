@@ -19,14 +19,14 @@
       </div>
       <div style="margin-top: 15px">
         <nuxt-link to="/">
-          <Button type="success" long>
+          <Button>
             去往首页
           </Button>
         </nuxt-link>
       </div>
     </div>
     <div style="position: fixed;top: 50px;width: 80%">
-      <Alert show-icon>
+      <Alert type="success" show-icon>
         联系客服方式
         <Icon slot="icon" type="ios-bulb-outline" />
         <template slot="desc">
@@ -40,7 +40,6 @@
 <script>
   export default {
     name: 'Error',
-    // eslint-disable-next-line vue/require-prop-types
     props: ['error'],
     data () {
       return {
@@ -57,11 +56,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #08AEEA;
-    background-image: linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);
-    background-image: -webkit-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);
-    background-image: -moz-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);
-    background-image: -o-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);
+    background-color: #303133;
+    /*background-image: linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);*/
+    /*background-image: -webkit-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);*/
+    /*background-image: -moz-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);*/
+    /*background-image: -o-linear-gradient(0deg,#08AEEA 0%,#2AF598 100%);*/
   }
   .box {
     display: flex;
