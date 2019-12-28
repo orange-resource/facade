@@ -8,6 +8,19 @@ const Sequelize = require('sequelize')
 const mysql = require('../plugins/mysql')
 const sequelize = mysql.sequelize
 
+router.post('/category/getCategoryList', asyncHandler(async (req, res, nuxt) => {
+  Category.findAll({
+    where: {
+      showStatus: 1
+    },
+    order: [
+      ['sort', 'ASC']
+    ]
+  }).then(list => {
+    res.json(Rsp.build(Rsp.SEARCH_SUCCESSFUL, list))
+  })
+}))
+
 router.post('/category/getList', permission, asyncHandler(async (req, res, nuxt) => {
   sequelize.query(
     'SELECT c.*, (SELECT COUNT(s.id) FROM t_section s WHERE s.category_id = c.id) as sectionCount ' +

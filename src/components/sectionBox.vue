@@ -8,7 +8,7 @@
     <div v-if="data.onStatus === 2" class="off-box">
       {{ data.offText }}
     </div>
-    <div v-if="data.openUrlStatus === 1" class="open">
+    <div v-if="data.openUrl !== ''" class="open">
       <span>点击查看详情</span>
     </div>
   </div>
@@ -64,12 +64,13 @@
     }
 
     .off-box {
-      width: 100%;
+      margin-left: -80%;
+      width: 80%;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 10px;
+      left: 50%;
       height: 60px;
-      background-color: #e8eaec;
+      background-color: #E4E7ED;
       display: flex;
       justify-content: center;
       align-items: center;

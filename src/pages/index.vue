@@ -23,12 +23,12 @@
               width="250"
               v-model="openCategory">
         <div class="category-count">
-          <span>总共有9个分类</span>
+          <span>总共有{{ categoryList.length }}个分类</span>
         </div>
-        <div style="margin-top: 10px">
+        <div v-for="(item, index) in categoryList" :key="'ca' + index" style="margin-top: 10px">
           <Button type="primary"
-                  @click="position('324242424234234')"
-                  :long="true">推荐</Button>
+                  @click="position(item.id)"
+                  :long="true">{{ item.name }}</Button>
         </div>
       </Drawer>
     </div>
@@ -41,29 +41,33 @@
       </div>
     </div>
     <!--  下方卡片  -->
-    <div v-if="sectionList.length > 0" class="bottom-box">
+    <div v-if="sectionList.length > 0" ref="bottomBox" class="bottom-box">
       <Row type="flex" justify="center">
 
         <Col class="" :xs="22" :sm="22" :md="22" :lg="20">
 
-          <div :id="324242424234234" class="category">
-            <span class="category-title">推荐</span>
-          </div>
-          <div class="card-box card-box-center">
-            <a-link
-                    v-for="(item,index) in sectionList"
-                    :key="'card' + index"
-                    :to="item.onStatus === 1 ? item.openUrl : 'javascript:void(0)'"
-                    :target="item.onStatus === 1 ? '_blank' : '_self'">
-              <section-box :data="item"></section-box>
-            </a-link>
+          <div v-for="(item, index) in categoryList" :key="'se' + index">
+
+            <div :id="item.id" class="category">
+              <span class="category-title">{{ item.name }}</span>
+            </div>
+            <div class="card-box card-box-center">
+              <a-link
+                v-for="(item,index) in item.sectionList"
+                :key="'card' + index"
+                :to="item.onStatus === 1 && item.openUrl !== '' ? item.openUrl : 'javascript:void(0)'"
+                :target="item.onStatus === 1 && item.openUrl !== '' ? '_blank' : '_self'">
+                <section-box :data="item"></section-box>
+              </a-link>
+            </div>
+
           </div>
 
         </Col>
 
       </Row>
     </div>
-    <div v-if="sectionList.length === 0" class="bottom-box">
+    <div v-if="sectionList.length === 0" ref="bottomBox" class="bottom-box">
       <none>
         <span class="none-span" style="color: #909399">空空如也...</span>
       </none>
@@ -84,6 +88,7 @@
       const data = {
         systemConfig: {},
         buttonGroup: [],
+        categoryList: [],
         sectionList: []
       }
 
@@ -121,6 +126,15 @@
         }
       })
 
+      await content.app.$axios.post(api + '/category/getCategoryList').then((res) => {
+        if (res.status === 200) {
+          const da = res.data
+          if (da.code === 200) {
+            data.categoryList = da.data
+          }
+        }
+      })
+
       await content.app.$axios.post(api + '/section/getSectionList').then((res) => {
         if (res.status === 200) {
           const da = res.data
@@ -128,6 +142,15 @@
             data.sectionList = da.data
           }
         }
+      })
+
+      data.categoryList.forEach(category => {
+        category.sectionList = []
+        data.sectionList.forEach(section => {
+          if (category.id === section.categoryId) {
+            category.sectionList.push(section)
+          }
+        })
       })
 
       return data
@@ -146,17 +169,13 @@
       handleScroll () {
         this.$nextTick(() => {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-          const offsetTop = document.getElementsByClassName("bottom-box").offsetTop
+          const offsetTop = this.$refs.bottomBox.offsetTop
           this.showSmallTop = scrollTop > offsetTop - 90
         })
       },
       position (id) {
-        console.log(id)
-        const scrollTop = document.getElementById(id)
-        console.log(scrollTop)
-        window.pageYOffset = scrollTop
-        document.documentElement.scrollTop = scrollTop
-        document.body.scrollTop = scrollTop
+        const offsetTop = document.getElementById(id).offsetTop
+        document.documentElement.scrollTop = offsetTop
         this.openCategory = false
       }
     },

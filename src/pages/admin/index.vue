@@ -9,7 +9,7 @@
     layout: 'admin',
     middleware: 'userAuth',
     mounted () {
-      this.$router.push('/admin/section')
+      this.$router.push('/admin/category')
     }
   }
 </script>

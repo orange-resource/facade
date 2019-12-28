@@ -1,6 +1,16 @@
 <template>
   <div>
     <admin :name="$options.name" :breadcrumb="breadcrumb">
+      <Select v-model="filter.categoryId"
+              ref="category"
+              style="width:200px">
+        <Option v-for="item in categoryList"
+                :value="item.value"
+                :key="item.value">{{ item.label }}</Option>
+      </Select>
+      <Button type="primary" @click="filterSection()">
+        筛选
+      </Button>
       <ButtonGroup>
         <Button type="primary" @click="createShowDrawer()">
           <Icon type="md-add-circle" />
@@ -153,6 +163,9 @@
         submitLoading: false,
         isAddData: true,
         categoryList: [],
+        filter: {
+          categoryId: ''
+        },
         columns: [
           {
             type: 'expand',
@@ -175,6 +188,11 @@
           {
             title: '版块名称',
             key: 'name',
+            align: 'center',
+          },
+          {
+            title: '所属分类',
+            key: 'categoryName',
             align: 'center',
           },
           {
@@ -307,9 +325,13 @@
         this.current = index
         this.getSectionList()
       },
+      filterSection () {
+        this.getSectionList()
+      },
       getSectionList () {
         this.loading = true
         const req = {
+          categoryId: this.filter.categoryId,
           limit: this.pageSize,
           offset: this.current
         }
