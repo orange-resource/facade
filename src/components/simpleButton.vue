@@ -1,6 +1,6 @@
 <template>
   <button class="button">
-    <Icon :type="icon" size="20" />
+    <Icon :type="icon" size="16" />
     <span class="text">
       {{ text }}
     </span>
@@ -26,8 +26,8 @@
     margin: 0;
     outline: none;
 
-    width: 146px;
-    height: 46px;
+    width: 136px;
+    height: 36px;
 
     background-color: #ffffff;
     border: none;
@@ -42,7 +42,7 @@
     justify-content: center;
     .text {
       margin-left: 8px;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 500;
       color: #409EFF;
     }

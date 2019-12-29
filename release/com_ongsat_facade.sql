@@ -1,21 +1,19 @@
 /*
- Navicat Premium Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : local
- Source Server Type    : MySQL
- Source Server Version : 50725
- Source Host           : localhost:3306
- Source Schema         : com_ongsat_facade
+Source Server         : localhost
+Source Server Version : 50725
+Source Host           : localhost:3306
+Source Database       : com_ongsat_facade
 
- Target Server Type    : MySQL
- Target Server Version : 50725
- File Encoding         : 65001
+Target Server Type    : MYSQL
+Target Server Version : 50725
+File Encoding         : 65001
 
- Date: 28/12/2019 19:30:18
+Date: 2019-12-29 21:41:08
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for t_aliyun_oss
@@ -90,6 +88,9 @@ CREATE TABLE `t_system_config` (
   `page_main_description` varchar(255) DEFAULT NULL,
   `footer_info` varchar(255) DEFAULT NULL,
   `logo_url` text COMMENT '网站logo',
+  `show_pop_status` int(2) DEFAULT NULL COMMENT '1=显示弹框 2=不显示',
+  `pop_image_url` text COMMENT '弹框图片',
+  `pop_open_url` text COMMENT '弹框跳转地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
 
@@ -103,5 +104,3 @@ CREATE TABLE `t_user` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理员用户表';
-
-SET FOREIGN_KEY_CHECKS = 1;

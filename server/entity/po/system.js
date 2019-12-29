@@ -25,7 +25,16 @@ const SystemConfig = sequelize.define('t_system_config', {
   },
   logoUrl: {
     type: Sequelize.TEXT
-  }
+  },
+  showPopStatus: {
+    type: Sequelize.INTEGER
+  },
+  popImageUrl: {
+    type: Sequelize.TEXT
+  },
+  popOpenUrl: {
+    type: Sequelize.TEXT
+  },
 }, { timestamps: false, freezeTableName: true })
 
 module.exports = SystemConfig

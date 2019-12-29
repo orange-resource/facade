@@ -72,3 +72,8 @@ body::-webkit-scrollbar {
   color: #ffffff;
   font-weight: 600;
 }
+
+.prompt-text {
+  color: #909399;
+  font-size: 13px;
+}

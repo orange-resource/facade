@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <!--  弹出框 -->
+    <pop-box v-if="systemConfig && systemConfig.showPopStatus === 1"
+             :url="systemConfig.popImageUrl" :to="systemConfig.popOpenUrl"></pop-box>
     <!--  头部  -->
     <div :class="{ 'visibility': showSmallTop }" class="top-box">
       <h1 class="title">{{ systemConfig.pageMainTitle }}</h1>
@@ -176,7 +179,7 @@
       },
       position (id) {
         const offsetTop = document.getElementById(id).offsetTop
-        document.documentElement.scrollTop = offsetTop
+        window.scrollTo(0, offsetTop + 180)
         this.openCategory = false
       }
     },
@@ -231,7 +234,8 @@
   }
   .top-box {
     width: 100%;
-    height: 380px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: #409EFF;
     display: flex;
     flex-direction: column;
@@ -248,7 +252,7 @@
     }
     .title {
       color: #ffffff;
-      font-size: 46px;
+      font-size: 36px;
       font-weight: 500;
       margin-bottom: 15px;
     }
@@ -280,7 +284,7 @@
     }
     @media all and (max-width: 992px) {
       .button-group-media {
-        margin-top: 10px;
+        margin-top: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -301,7 +305,7 @@
   .bottom-box {
     .category {
       text-align: center;
-      margin-top: 80px;
+      margin-top: 36px;
       margin-bottom: 40px;
       .category-title {
         font-weight: 900;

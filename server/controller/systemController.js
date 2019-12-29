@@ -36,7 +36,10 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
           footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
           pageMainDescription: req.body.pageMainDescription,
-          logoUrl: req.body.logoUrl
+          logoUrl: req.body.logoUrl,
+          showPopStatus: req.body.showPopStatus,
+          popImageUrl: req.body.popImageUrl,
+          popOpenUrl: req.body.popOpenUrl
         }, {
           where: { id: configList[0].id }
         }).then(() => {
@@ -49,7 +52,10 @@ router.post('/system/config/save', permission, asyncHandler(async (req, res, nux
           footerInfo: req.body.footerInfo,
           pageMainTitle: req.body.pageMainTitle,
           pageMainDescription: req.body.pageMainDescription,
-          logoUrl: req.body.logoUrl
+          logoUrl: req.body.logoUrl,
+          showPopStatus: req.body.showPopStatus,
+          popImageUrl: req.body.popImageUrl,
+          popOpenUrl: req.body.popOpenUrl
         }).then(systemConfig => {
           res.json(Rsp.build(Rsp.SUCCEED))
         })

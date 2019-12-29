@@ -12,7 +12,8 @@
         type: String
       },
       target: {
-        type: String
+        type: String,
+        default: '_blank'
       }
     }
   }

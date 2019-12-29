@@ -75,6 +75,9 @@
         </FormItem>
         <FormItem label="版块主图" :required="true">
           <upload-img :limit="1" :urlList="formValidate.urlList" @on-success="uploadSuccess"></upload-img>
+          <span class="prompt-text">
+            主图尺寸推荐 320px * 120px
+          </span>
         </FormItem>
         <FormItem label="版块名称" :required="true">
           <Input v-model="formValidate.name" placeholder="请输入版块名称"></Input>
@@ -85,7 +88,7 @@
                  show-word-limit
                  maxlength="500"
                  :autosize="{minRows: 2,maxRows: 5}"
-                 placeholder="输入点击跳转链接..."></Input>
+                 placeholder="请输入版块描述..."></Input>
         </FormItem>
         <FormItem label="版块显示状态">
           <i-switch v-model="formValidate.showStatusBool"
@@ -102,7 +105,10 @@
           <Input v-model="formValidate.openUrl"
                  type="textarea"
                  :autosize="{minRows: 2,maxRows: 5}"
-                 placeholder="输入点击跳转链接..."></Input>
+                 placeholder="请输入点击跳转链接..."></Input>
+          <span class="prompt-text">
+            如果没有跳转链接不要填就行了
+          </span>
         </FormItem>
         <FormItem label="版块访问状态">
           <i-switch v-model="formValidate.onStatusBool"

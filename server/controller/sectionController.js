@@ -53,11 +53,13 @@ from t_section s `;
         section.offText = section.off_text
         section.onStatus = section.on_status
         section.openUrl = section.open_url
+        section.showStatus = section.show_status
         delete section.category_id
         delete section.main_picture
         delete section.off_text
         delete section.on_status
         delete section.open_url
+        delete section.show_status
       })
       resolve(list)
     })
